@@ -1,0 +1,95 @@
+.tab-container {
+    height: 100%;
+    width: 40%;
+}
+.tab-wrapper {
+    display: flex;
+    flex-direction: column;
+    background: var(--white);
+    margin: 10px 0 ;
+    margin-left: 10px;
+    border-radius: 10px;
+}
+.tabs-title {
+    display: flex;
+    justify-content: space-around;
+}
+.tab-item {
+    height: 50px;
+    padding: 20px;
+    font-size: 1em;
+    font-family: 'Poppins', sans-serif;
+    color: var(--light-gray);
+    text-transform: uppercase;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    font-weight: bold;
+}
+.tab-item.active {
+    border-bottom: solid 2px var(--light-green);
+    color: var(--light-green);
+    transition: all 0.3s ease;
+}
+.tab-pane {
+    display: none;
+    padding: 10px 0;
+}
+.tab-pane.active {
+    display: block;
+}
+.tab-pane-block {
+    display: flex;
+    align-items: center;
+    padding: 10px 0;
+    transition: all 0.3s ease;
+}
+.tab-pane-block:hover {
+    background: rgb(240, 250, 240);
+    transition: all 0.3s ease;
+}
+.tab-pane-block:last-child {
+    padding: 8px 0;
+}
+.song-list-number {
+    width: 50px;
+    height: 50px;
+    text-align: center;
+    line-height: 50px;
+}
+.song-list-image img {
+    width: 45px;
+    height: 45px;
+    border-radius: 3px;
+    cursor: pointer;
+}
+.song-list-left {
+    text-align: left;
+    display: flex;
+    flex-grow: 1;
+}
+.song-list-info {
+    display: flex;
+    flex-direction: column;
+    padding: 0 10px;
+}
+.song-list-info a {
+    font-family: 'Poppins', sans-serif;
+    font-weight: 600;
+    cursor: pointer;
+    text-decoration: none;
+    color: var(--light-dark);
+}
+.song-list-info a:last-child {
+    color: rgba(0 0 0 /30%);
+    font-size: 0.9em;
+}
+.song-list-icon {
+    display: flex;
+    cursor: pointer;
+    padding: 0 20px;
+}
+.song-list-likecount {
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif!important;
+    font-weight: lighter;
+    color: var(--light-dark);
+}

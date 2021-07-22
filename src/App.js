@@ -1,25 +1,35 @@
-import logo from './logo.svg';
 import './App.css';
+import React from 'react';
+import {
+    BrowserRouter as Router, 
+    Switch, 
+    Route } from 'react-router-dom';
+
+import Layout from './pages/Layout/Layout';
+import Home from './pages/Home/Home';
+import SongDetailPage from './pages/SongDetail/SongDetail';
+import CategoryPage from './pages/Category/CategoryPage';
+import SongCategoryPage from './pages/Category/SongCategoryPage';
+
+import SignIn from './pages/Authenticate/SignIn';
+import SignUp from './pages/Authenticate/SignUp';
 
 function App() {
-  return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
-  );
+    return (
+        <Router>
+            <div className="App">
+                <Layout/>
+                <Switch>
+                    <Route path='/' exact component={Home}></Route>
+                    <Route path='/song/:slug' exact component={SongDetailPage}></Route>
+                    <Route path='/category' exact component={CategoryPage}></Route>
+                    <Route path='/genre/:type' exact component={SongCategoryPage}></Route>
+                    <Route path='/auth/login' exact component={SignIn}></Route>
+                    <Route path='/auth/register' exact component={SignUp}></Route>
+                </Switch>
+            </div>
+        </Router>
+    );
 }
 
 export default App;
