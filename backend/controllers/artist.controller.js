@@ -1,9 +1,5 @@
 const Artist = require('../models/artist.model');
 const Song = require('../models/song.model');
-const User = require('../models/user.model');
-
-const mongoose = require('mongoose');
-
 class ArtistController {
     async getAllArtist(req, res) {
         const artists = await Artist.find({});
