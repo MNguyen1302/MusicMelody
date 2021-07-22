@@ -12,7 +12,7 @@ class AdminController {
         return res.status(200).send(songs);
     }
 
-    async postSong(req, res) {
+    async createSong(req, res) {
         const user = await User.findOne({_id: req.body.id});
 
         if(!req.body.name || !req.body.artist || !req.body.composer || !req.body.lyric || !req.files['audio'] || !req.files['image']) {
@@ -50,7 +50,7 @@ class AdminController {
             })
     }
 
-    async postArtist(req, res) {
+    async createArtist(req, res) {
         if(!req.body.name || !req.body.description || !req.body.genre || !req.files['image']) {
             return res.status(400).send(['error', 'One field is required'])
         }

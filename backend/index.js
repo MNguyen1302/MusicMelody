@@ -11,14 +11,11 @@ const passport = require('passport');
 const cors = require('cors');
 
 const authRoute = require('./routes/auth');
-const profileRoute = require('./routes/profile');
+const userRoute = require('./routes/user');
 const adminRoute = require('./routes/admin');
 const songRoute = require('./routes/song');
 const commentRoute = require('./routes/comment');
 const artistRoute = require('./routes/artist');
-
-// const authMiddleware = require('./middlewares/auth.middleware');
-// const upload = require('./middlewares/multer.middleware');
 
 const app = express();
 
@@ -40,7 +37,7 @@ app.use(methodOverride('_method'));
 app.use(express.static('public'));
 
 app.use('/auth', authRoute);
-app.use('/profile', profileRoute);
+app.use('/user', userRoute);
 app.use('/admin', adminRoute);
 app.use('/song', songRoute);
 app.use('/comment', commentRoute);

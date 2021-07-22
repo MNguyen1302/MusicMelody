@@ -6,9 +6,9 @@ const controller = require('../controllers/admin.controller');
 
 const upload = require('../middlewares/multer.middleware');
 
-router.post('/post/song', upload, controller.postSong);
+router.post('/create/song', upload, controller.createSong);
 
-router.post('/post/artist', upload, controller.postArtist);
+router.post('/create/artist', upload, controller.createArtist);
 
 router.patch('/edit/:slug', upload, controller.editSong);
 

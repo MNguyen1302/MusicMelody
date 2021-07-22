@@ -2,8 +2,7 @@ const Comment = require('../models/comment.model');
 
 class CommentController {
     async post(req, res) {
-        console.log(req.body)
-        const id = req.body.id;
+        const id = req.body.userId;
 
         const comment = await Comment({
             userId: id,

@@ -4,7 +4,7 @@ const bcrypt = require('bcryptjs');
 const cloudinary = require('../services/cloudinary');
 
 class ProfileController {
-    async update(req, res) {
+    async updateProfile(req, res) {
         const id = req.params.id;
 
         if(req.files['avatar']) {
@@ -53,7 +53,7 @@ class ProfileController {
             })
     }
 
-    async getProfile(req, res) {
+    async getUser(req, res) {
         const id = req.params.id;
 
         if(!id) {
@@ -64,6 +64,16 @@ class ProfileController {
         if(user) {
             res.status(200).send(user);
         }
+    }
+
+    async getFavourites(req, res) {
+        const id = req.params.id;
+
+        if(!id) return res.status(400).send(`No user with id: ${id}`);
+
+        const user = await User.findById(id).populate('favourites');
+
+        return res.status(200).send(user.favourites);
     }
 }
 

@@ -15,7 +15,7 @@ const artistSchema = new Schema({
         ref: 'User',
         default: []
     }],
-    followCount: { type: Number, default: 0}
+    followerCount: { type: Number, default: 0}
 },{
     timestamps: true
 })

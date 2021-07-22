@@ -22,7 +22,7 @@ const songSchema = new Schema({
         ref: 'User',
         default: []
     }],
-    likeCount: { type: Number, default: 0}
+    likeCount: { type: Number, default: 0},
 },{
     timestamps: true
 })

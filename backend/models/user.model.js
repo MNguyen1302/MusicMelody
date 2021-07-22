@@ -9,7 +9,12 @@ const userSchema = new Schema({
     password: { type: String},
     firstname: { type: String},
     lastname: { type: String},
-    address: { type: String}
+    address: { type: String},
+    favourites: [{
+        type: mongoose.Schema.Types.ObjectId,
+        ref: 'Song',
+        default: []
+    }]
 })
 const User = mongoose.model('User', userSchema);
 module.exports = User;
