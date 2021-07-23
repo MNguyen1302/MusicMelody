@@ -16,13 +16,12 @@ class ProfileController {
             req.body.avatar = avatar[0].url;
         }
 
-        User.updateOne({_id: id}, req.body)
-            .then(() => {
-                return res.status(200);
-            })
-            .catch(error => {
-                return res.status(500).json({ message: error });
-            })
+        await User.findOneAndUpdate({_id: id}, req.body, { new: true }, (err, result) => {
+            if(err) {
+                console.log(err);
+            }
+            res.status(200).send(result);
+        })
     }
 
     async changePassword(req, res) {
@@ -66,7 +65,7 @@ class ProfileController {
         }
     }
 
-    async getFavourites(req, res) {
+    async getFavourite(req, res) {
         const id = req.params.id;
 
         if(!id) return res.status(400).send(`No user with id: ${id}`);

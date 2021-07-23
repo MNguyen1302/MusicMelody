@@ -42,12 +42,10 @@ class AdminController {
             writerId: user._id
         })
         song.save()
-            .then(() => {
-                return res.status(200).send(['success', 'Post Success'])
-            })
-            .catch(error => {
-                return res.status(400).send(error)
-            })
+            .then(result => result)
+            .catch(error => error)
+
+        return res.status(202).send(song);
     }
 
     async createArtist(req, res) {
@@ -68,12 +66,9 @@ class AdminController {
             image: image[0].url,
         })
         artist.save()
-            .then(() => {
-                return res.status(200).send('success')
-            })
-            .catch(error => {
-                return res.status(400).send(error)
-            })
+            .then(result => result)
+            .catch(error => error)
+        return res.status(202).send(artist);
     }
 
     async editSong(req, res) {
@@ -94,27 +89,26 @@ class AdminController {
             const image = await Promise.all(imagePromises);
             req.body.image = image[0].url;
         }
-        console.log(req.body.image);
 
-        Song.updateOne({slug: req.params.slug}, req.body)
-            .then(() => {
-                return res.status(200).send('success')
-            })
-            .catch(error => {
-                return res.status(500).send(error);
-            })
+        await Song.findOneAndUpdate({slug: req.params.slug}, req.body, { new: true }, (err, result) => {
+            if(err) {
+                console.log(err);
+            }
+            res.status(200).send(result);
+        })
     }
 
     async deleteSong(req, res) {
         const id = req.params.id;
-        const song = await Song.findOne({_id: id})
+        const song = await Song.findById(id);
         Song.deleteOne({_id: id})
-            .then(() => {
-                return res.status(200).send(['success', 'Delete song successfully'])
-            })
-            .catch(error => {
-                return res.status(500).send(error)
-            })
+        .then(() => Comment.remove({songSlug: song.slug}))
+        .then(() => {
+            return res.status(200).send('success');
+        })
+        .catch(error => {
+            return res.status(400).send(error)
+        })
     }
 
 }

@@ -11,12 +11,9 @@ class CommentController {
             date: new Date()
         })
         comment.save()
-            .then(() => {
-                return res.status(200).send('success');
-            })
-            .catch(error => {
-                return res.status(500).send(error);
-            })
+            .then(result => result)
+            .catch(error => error)
+        res.status(202).send(comment);
     }
 }
 
