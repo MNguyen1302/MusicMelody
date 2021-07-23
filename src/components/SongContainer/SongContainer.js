@@ -4,15 +4,13 @@ import { Link } from 'react-router-dom';
 
 import { getAllSongs } from '../../redux/actions/song';
 import SongCard from '../SongCard/SongCard';
-// import LoadingBox from '../../Loading/LoadingBox';
+import LoadingS2 from '../Loading/LoadingS2';
 import './SongContainer.css';
 
 function SongContainer(props) {
-    const { songs } = useSelector(state => state.song);
+    const { songs, loading } = useSelector(state => state.song);
     const dispatch = useDispatch();
 
-    const [ songList, setSongList ] = useState([]);
-    const [ isLoading, setLoading ] = useState(false);
     const [ isSortAZ, setSortAZ ] = useState(false);
     const [ isPopup, setPopup ] = useState(false);
 
@@ -59,19 +57,17 @@ function SongContainer(props) {
         setSortAZ(status);
 
         if(!isSortAZ) {
-            const newSongList = songList.sort((a, b) => {
+            songs.sort((a, b) => {
                 let textA = a.name.toLowerCase();
                 let textB = b.name.toLowerCase();
                 return (textA < textB) ? -1 : (textA > textB) ? 1 : 0;
             })
-            setSongList(newSongList);
         } else {
-            const newSongList = songList.sort((a, b) => {
+            songs.sort((a, b) => {
                 let textA = a.name.toLowerCase();
                 let textB = b.name.toLowerCase();
                 return (textA > textB) ? -1 : (textA < textB) ? 1 : 0;
             })
-            setSongList(newSongList);
         }
     } 
 
@@ -98,7 +94,7 @@ function SongContainer(props) {
                         </div>
                     ) : (
                         <div className="viewmore">
-                            <Link to="/allsong">
+                            <Link to="/allsongs">
                                 <h3>View More</h3>
                                 <i className="ri-arrow-right-s-line"></i>
                             </Link>
@@ -107,20 +103,18 @@ function SongContainer(props) {
                 }
             </div>
             <div className="song-wrapper">
-                {/* {
-                    isLoading && (
+                {
+                    loading ? (
                         <div className="song-loader">
-                            <LoadingBox/>
-                            <LoadingBox/>
-                            <LoadingBox/>
-                            <LoadingBox/>
-                            <LoadingBox/>
-                            <LoadingBox/>
+                            <LoadingS2/>
+                            <LoadingS2/>
+                            <LoadingS2/>
+                            <LoadingS2/>
+                            <LoadingS2/>
+                            <LoadingS2/>
                         </div>
-                    )
-                } */}
-
-                { songTitleSwitch(props.title) }
+                    ) : (songTitleSwitch(props.title))
+                }
             </div>
         </div>
     )

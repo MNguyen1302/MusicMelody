@@ -1,7 +1,7 @@
 import * as types from '../types';
 import * as apis from '../../apis/auth';
 
-export const login = (user, history) => async (dispatch) => {
+export const login = (user) => async (dispatch) => {
     try {
         const { data } = await apis.login(user);
 

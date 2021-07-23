@@ -37,7 +37,7 @@ function AudioBar() {
     const startTimer = () => {
         clearInterval(intervalRef.current);
 
-        if(audioElement.current != null) {
+        if(audioElement.current !== null) {
             setDuration(audioElement.current.duration);
         }
 
@@ -80,19 +80,19 @@ function AudioBar() {
                 <div className="audio-info-bar">
                     <div className="audio-track">
                         {
-                            currSong != null && (
+                            currSong !== null && (
                                 <img src={currSong.image} alt="" id="song-image"/>
                             )
                         }
                     </div>
                     <div className="audio-content">
-                        <Link to={currSong != null && ('/song/' + currSong.slug)}><span id="song-name">{currSong != null && currSong.name}</span></Link>
+                        <Link to={currSong !== null && ('/song/' + currSong.slug)}><span id="song-name">{currSong !== null && currSong.name}</span></Link>
                         <br/>
-                        <Link to='/artist'><span id="song-artist">{currSong != null && currSong.artist}</span></Link>
+                        <Link to='/artist'><span id="song-artist">{currSong !== null && currSong.artist}</span></Link>
                         <audio 
                             id="song-audio"
                             ref={audioElement} 
-                            src={currSong != null && currSong.audio}
+                            src={currSong !== null && currSong.audio}
                         ></audio>
                     </div>
                 </div>  

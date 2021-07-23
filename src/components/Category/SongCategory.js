@@ -17,7 +17,7 @@ function CategoryShow() {
     useEffect(() => {
         dispatch(getCategory(type));
     }, [])
-
+    
     const handlePopup = () => {
         setPopup(!isPopup);
     }

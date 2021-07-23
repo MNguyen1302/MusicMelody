@@ -8,15 +8,16 @@ import cookies from 'js-cookie';
 import axios from 'axios';
 
 import { getSong, likeSong } from '../../redux/actions/song';
+import Modal from '../Modal/Modal';
 import Comment from '../Comment/Comment';
-// import Loading from '../Loading/Loading';
+import LoadingPage from '../LoadingPage/LoadingPage';
 import './SongDetail.css';
 
 function SongDetail() {
     const userId = cookies.get('userId');
 
     const { isLogged } = useSelector(state => state.user);
-    const { song, comments } = useSelector(state => state.song);
+    const { song, comments, loading } = useSelector(state => state.song);
 
     const { slug } = useParams();
     const dispatch = useDispatch();
@@ -24,7 +25,7 @@ function SongDetail() {
     const audioElement = useRef();
 
     const [ isPlaying, setPlayPauseClick ] = useState(false);
-    const [ isLoading, setLoading ] = useState(false);
+    const [ showModal, setShowModal ] = useState(false);
     const [ isLiked, setIsLiked ] = useState(false);
     const [ userLikes, setUserLikes ] = useState(0);
 
@@ -37,7 +38,7 @@ function SongDetail() {
 
     useEffect(() => {
         dispatch(getSong(slug));
-    }, [song, comments])
+    }, [])
 
     useEffect(async () => {
         await axios.get(`http://localhost:8080/song/${slug}/getLike`)
@@ -74,83 +75,86 @@ function SongDetail() {
         setTimeout(() => {
             setUserLikes(isLiked ? userLikes + 1 : userLikes - 1);
             setIsLiked(!isLiked);
+            setShowModal(true);
         }, 500);
+
+        setTimeout(() => {
+            setShowModal(false);
+        }, 3000)
 
         dispatch(likeSong(slug, userId));
     }
 
     return (
-        <div className="song-detail-container">
-            <div className="song-detail-wrapper">
-                <div className="song-detail-header">
-                    <img 
-                        src={song.image} 
-                        className="song-detail-background" 
-                        alt=""
-                    />
-                    <div className="song-detail">
-                        <div className="song-detail-image">
-                            <img src={song.image} alt=""/>
-                        </div>
-                        <div className="song-detail-main">
-                            <div className="song-detail-info">
-                                <span>{song.name}</span>
-                                <br/>
-                                <span>{song.artist}</span>
-                            </div>
-                            <div className="song-detail-icon-box">
-                                <audio id="audio" ref={audioElement} src={song.audio}></audio>
-                                <div className="song-detail-icon">
-                                    <button className="btn btn-toggle-play" onClick={handlePlayBtn}>
-                                        <i className="ri-play-circle-fill icon-play"></i> 
-                                    </button>
+        <div>
+            { loading ? <LoadingPage/> : (
+                <div className="song-detail-container">
+                    <div className="song-detail-wrapper">
+                        <div className="song-detail-header">
+                            <img 
+                                src={song.image} 
+                                className="song-detail-background" 
+                                alt=""
+                            />
+                            <div className="song-detail">
+                                <div className="song-detail-image">
+                                    <img src={song.image} alt=""/>
                                 </div>
-                                <div className="song-detail-extra">
-                                    <Link to={song.audio} target="_blank" download={song.name + '-' + song.artist}>
-                                        <i className="fas fa-download"></i>
-                                    </Link>
-                                    <span 
-                                        className="btn-like" 
-                                        id="btn-like"
-                                        onClick={handleLike}
-                                    >
-                                        <span id="numbers-like">{userLikes}</span> 
-                                        <svg 
-                                            className={ !isLiked ? 'three on' : 'three' }
-                                            width="16px" 
-                                            height="16px" 
-                                            viewBox="0 0 100 100"
-                                        >
-                                            <g className="heartOne">
-                                                <path className="heartEX" d="M 90,40 a 20 20 0 1 0 -40,-25 a 20 20 0 1 0 -40,25 l 40,50  z" />
-                                                <path className="heart" d="M 90,40 a 20 20 0 1 0 -40,-25 a 20 20 0 1 0 -40,25 l 40,50  z" />
-                                                <path className="points" d="M 90,40 a 20 20 0 1 0 -40,-25 a 20 20 0 1 0 -40,25 l 40,50  z" />
-                                            </g>
-                                        </svg>
-                                    </span>
+                                <div className="song-detail-main">
+                                    <div className="song-detail-info">
+                                        <span>{song.name}</span>
+                                        <br/>
+                                        <span>{song.artist}</span>
+                                    </div>
+                                    <div className="song-detail-icon-box">
+                                        <audio id="audio" ref={audioElement} src={song.audio}></audio>
+                                        <div className="song-detail-icon">
+                                            <button className="btn btn-toggle-play" onClick={handlePlayBtn}>
+                                                <i className="ri-play-circle-fill icon-play"></i> 
+                                            </button>
+                                        </div>
+                                        <div className="song-detail-extra">
+                                            <Link to={song.audio} target="_blank" download={song.name + '-' + song.artist}>
+                                                <i className="fas fa-download"></i>
+                                            </Link>
+                                            <span 
+                                                className="btn-like" 
+                                                id="btn-like"
+                                                onClick={handleLike}
+                                            >
+                                                <span id="numbers-like">{userLikes}</span> 
+                                                <svg 
+                                                    className={ !isLiked ? 'three on' : 'three' }
+                                                    width="16px" 
+                                                    height="16px" 
+                                                    viewBox="0 0 100 100"
+                                                >
+                                                    <g className="heartOne">
+                                                        <path className="heartEX" d="M 90,40 a 20 20 0 1 0 -40,-25 a 20 20 0 1 0 -40,25 l 40,50  z" />
+                                                        <path className="heart" d="M 90,40 a 20 20 0 1 0 -40,-25 a 20 20 0 1 0 -40,25 l 40,50  z" />
+                                                        <path className="points" d="M 90,40 a 20 20 0 1 0 -40,-25 a 20 20 0 1 0 -40,25 l 40,50  z" />
+                                                    </g>
+                                                </svg>
+                                            </span>
+                                        </div>
+                                    </div>
                                 </div>
                             </div>
                         </div>
-                    </div>
-                </div>
-                <div className="song-detail-lyric">
-                    <div className="song-detail-lyric-wrapper">
-                        <div className="song-detail-lyric-title">Lyric {song.name}</div>
-                        {/* {
-                            isLoading ? (
-                                <Loading/>
-                            ) : (
+                        <div className="song-detail-lyric">
+                            <div className="song-detail-lyric-wrapper">
+                                <div className="song-detail-lyric-title">Lyric {song.name}</div>
                                 <div className="lyric">{song.lyric}</div>
-                            )
-                        } */}
-                        <div className="lyric">{song.lyric}</div>
+                            </div>
+                            <Comment 
+                                slug={song.slug}
+                                comments={comments}    
+                            />
+                        </div>
                     </div>
-                    <Comment 
-                        slug={song.slug}
-                        comments={comments}    
-                    />
+                    { showModal ? <Modal content={!isLiked ? 'Add to your Favourite Songs' : 'Remove from your Favourite Songs'} opacity={showModal ? 1 : 0}/> : ''}
                 </div>
-            </div>
+            )}
         </div>
     )
 }

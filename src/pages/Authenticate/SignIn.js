@@ -30,7 +30,7 @@ function SignIn() {
     const handleSubmitLogin = async (e) => {
         e.preventDefault();
         
-        dispatch(login(user, history));
+        dispatch(login(user));
     }   
     
     const handleChange = (e) => {

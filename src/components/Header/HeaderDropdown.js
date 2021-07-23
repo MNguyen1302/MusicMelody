@@ -5,7 +5,9 @@ function HeaderDropdown(props) {
     return (
         <div className="user-dropdown">
             <div className="user-choose">
-                <Link to="/profile">
+                <Link 
+                    to="/profile"
+                >
                     <i className="ri-user-line"></i>
                     <span>Profile</span>
                 </Link>

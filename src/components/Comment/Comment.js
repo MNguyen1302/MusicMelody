@@ -3,8 +3,7 @@ import { useHistory } from 'react-router-dom';
 import { useDispatch, useSelector } from 'react-redux';
 import cookies from 'js-cookie';
 
-import { postComment } from '../../redux/actions/comment';
-import { getUser } from '../../apis/user';
+import { postComment } from '../../redux/actions/song';
 import CommentItem from './CommentItem';
 
 function Comment(props) {
@@ -19,16 +18,12 @@ function Comment(props) {
     const handleSubmitCmt = async (e) => {
         e.preventDefault();
         
-        const status = await postComment(
+        dispatch(postComment(
             formData.content,
             userId,
-            props.slug
-        )
-        if(status === 'success') {
-            setFormData({
-                content: ''
-            })
-        }
+            props.slug,
+            setFormData
+        ))
     }
 
     const handleChange = (e) => {

@@ -54,12 +54,12 @@ function Sidebar() {
             {
                 label: 'Add Music',
                 icon: 'ri-add-line',
-                url: '/admin/post/song'
+                url: '/admin/create/song'
             },
             {
                 label: 'Add Artist',
                 icon: 'ri-user-add-line',
-                url: '/admin/post/artist'
+                url: '/admin/create/artist'
             },
             {
                 label: 'My Post',

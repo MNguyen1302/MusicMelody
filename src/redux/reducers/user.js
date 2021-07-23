@@ -3,7 +3,7 @@ import cookies from 'js-cookie';
 
 let initialState = {
     user: null,
-    favourites: [],
+    favourite: [],
     isLogged: false,
     loading: false,
     errors: null
@@ -13,6 +13,11 @@ const user = (state = initialState, action) => {
     let { type, payload } = action;
 
     switch (type) {
+        case types.TOGGLE_LOADING:
+            return {
+                ...state,
+                loading: true
+            }
         case types.GET_USER: 
             return {
                 ...state,
@@ -25,6 +30,21 @@ const user = (state = initialState, action) => {
             cookies.remove('userId');
 
             return initialState;
+
+        case types.EDIT_USER:
+            return Object.assign({}, state, { user: payload });
+
+        case types.CHANGE_PASSWORD:
+            return {
+                ...state
+            }
+
+        case types.GET_FAVOURITE:
+            return {
+                ...state,
+                favourite: payload,
+                loading: false
+            }
         default: 
             return state;
     }

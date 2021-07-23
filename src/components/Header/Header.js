@@ -93,7 +93,7 @@ function Header() {
                     </div>
                 </div>
             ) : (
-                user == null && (
+                user === null && (
                     <div className="btn-signin">
                         <Link to='/auth/login' className="signin-link">
                             Sign In

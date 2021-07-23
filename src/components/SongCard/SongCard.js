@@ -6,7 +6,9 @@ import './SongCard.css';
 function SongCard({song}) {
     return (
         <div className="song-card-box">
-            <Link to={'/song/' + song.slug}>
+            <Link 
+                to={'/song/' + song.slug}
+            >
                 <div className="song-image">
                     <img src={song.image} alt="" />
                     <div className="btn-play">

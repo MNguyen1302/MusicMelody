@@ -12,6 +12,9 @@
     padding: 0;
     box-sizing: border-box;
 }
+.App {
+    position: relative;
+}
 .content-page {
     margin-left: 17.5rem;
     margin-top: 80px;

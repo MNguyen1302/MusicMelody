@@ -1,0 +1,151 @@
+.tabs-profile {
+    display: flex;
+    margin: 0 30px;
+    justify-content: space-between;
+    text-align: center;
+    border-radius: 50px;
+    background: var(--white);
+}
+.tab-profile-item {
+    padding: 10px 100px;
+    font-family: 'Poppins', sans-serif;
+    font-size: 1.1em;
+    font-weight: bold;
+    color: rgb(204, 248, 204);
+    text-align: center;
+    border-radius: 50px;
+    border-right: solid 1px var(--light-green);
+    border-left: solid 1px var(--light-green);
+    box-shadow: 0 7px 15px rgb(0 0 0 / 5%);
+    flex-grow: 2;
+    cursor: pointer;
+    transition: all 0.5s ease;
+}
+.tab-profile-pane {
+    display: none;
+    justify-content: center;
+    padding: 30px;
+}
+.profile-user {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+}
+.profile-input {
+    display: flex;
+    flex-direction: column;
+}
+.profile-input span {
+    width: 700px;
+    padding: 10px 0;
+    font-family: 'Poppins', sans-serif;
+    color: var(--light-dark);
+}
+.profile-input span:first-child {
+    font-weight: 600;
+}
+.profile-input span:last-child {
+    border-bottom: solid 1px rgba(0 0 0 /30%);
+}
+.form-edit {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+}
+.form-edit-avatar,
+.profile-user-avatar {
+    position: relative;
+    margin: 0 50px;
+    width: 200px;
+    height: 200px;
+    border-radius: 50%;
+}
+.form-edit-avatar img,
+.profile-user-avatar img {
+    width: 200px;
+    height: 200px;
+    border-radius: 50%;
+}
+.form-edit-profile {
+    padding: 20px 0;
+}
+.image-edit {
+    position: absolute;
+    width: 30px;
+    height: 30px;
+    line-height: 30px;
+    text-align: center;
+    color: var(--white);
+    background: var(--light-green);
+    border-radius: 50%;
+    right: 15px;
+    bottom: 12px;
+}
+.file-upload {
+    position: absolute;
+    width: 30px;
+    height: 30px;
+    top: 5px;
+    right: 2px;
+    opacity: 0;
+}
+.input-edit {
+    display: flex;
+    flex-direction: column;
+    padding: 10px 0;
+    width: 100%;
+    font-family: 'Poppins', sans-serif;
+}
+.input-edit label {
+    padding: 5px 0;
+    font-weight: 600;
+    color: var(--light-gray);
+}
+.input-edit input {
+    width: 700px;
+    height: 45px;
+    padding: 15px 10px;
+    font-size: 1em;
+    font-family: 'Poppins', sans-serif;
+    outline: none;
+    border: solid 1px rgba(0 0 0 /10%);
+    border-radius: 5px;
+    color: rgba(0 0 0 /30%);
+}
+.input-edit input:focus {
+    border-color: var(--light-green);
+    color: var(--light-gray);
+}
+.btn-handle {
+    padding: 10px 0;
+}
+.btn-change-profile, .btn-cancel {
+    padding: 8px 20px;
+    font-size: 1em;
+    border: none;
+    cursor: pointer;
+    color: var(--white);
+    border-radius: 5px;
+    font-family: 'Poppins', sans-serif;
+    font-weight: 600;
+}
+.btn-cancel {
+    margin-left: 10px;
+    background: var(--white);
+    color: var(--light-green);
+    border: solid 1px rgba(0 0 0 /5%);
+}
+.btn-change-profile {
+    background: var(--light-green);
+}
+.tab-profile-item:last-child {
+    flex-grow: 1;
+}
+.tab-profile-item.active {
+    background: rgb(234, 252, 234);
+    color: var(--light-green);
+    transition: all 0.5s ease;
+}
+.tab-profile-pane.active {
+    display: flex;
+}

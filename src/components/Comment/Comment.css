@@ -25,12 +25,10 @@
 .song-detail-comment-box {
     padding: 20px 30px;
     display: flex;
-    /* border-top: solid 2px #dee2e6; */
+    background: white;
 }
-hr {
-    border: 0;
-    border-top: 2px solid #dee2e6;
-    margin: 0 30px;
+.song-detail-comment-box:nth-child(odd) {
+    background: rgb(249, 255, 249);
 }
 .song-comment-header {
     display: flex;
