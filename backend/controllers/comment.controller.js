@@ -9,10 +9,13 @@ class CommentController {
             content: req.body.content,
             songSlug: req.params.slug,
             date: new Date()
-        })
+        });
+
         comment.save()
             .then(result => result)
             .catch(error => error)
+            
+        await comment.populate('userId').execPopulate();
         res.status(202).send(comment);
     }
 }

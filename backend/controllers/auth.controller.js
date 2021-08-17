@@ -1,8 +1,10 @@
+require('dotenv');
 const User = require('../models/user.model');
 
 const bcrypt = require('bcryptjs');
 const jwt = require('jsonwebtoken');
-
+const { OAuth2Client } = require('google-auth-library');
+const client = new OAuth2Client(process.env.GOOGLE_CLIENT_ID);
 class AuthController {
     async login(req, res) {
         const { email, password } = req.body;
@@ -51,6 +53,26 @@ class AuthController {
         
         return res.status(200).json({ user: user, token: token })
     }
+    async loginGoogle(req, res) {
+        const { tokenId } = req.body;
+        const ticket = await client.verifyIdToken({ idToken: tokenId, audience: process.env.GOOGLE_CLIENT_ID });
+        const payload = ticket.getPayload();
+        const { sub, email, name, picture, given_name, family_name } = payload;
 
+        const user = await User.findOne({ googleId: sub });
+        if(user) {
+            res.status(200).json(user);
+        } else {
+            const newUser = new User({
+                name,
+                email,
+                googleId: sub,
+                avatar: picture,
+                firstname: given_name,
+                lastname: family_name
+            }).save();
+            res.status(200).json(newUser);
+        }
+    }
 }
 module.exports = new AuthController();

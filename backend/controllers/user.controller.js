@@ -70,9 +70,9 @@ class ProfileController {
 
         if(!id) return res.status(400).send(`No user with id: ${id}`);
 
-        const user = await User.findById(id).populate('favourites');
-
-        return res.status(200).send(user.favourites);
+        const user = await User.findById(id).populate('favourites').populate('artists');
+        // console.log(user)
+        return res.status(200).json({ favourites: user.favourites, artists: user.artists });
     }
 }
 

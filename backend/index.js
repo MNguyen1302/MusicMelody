@@ -1,13 +1,10 @@
 require('dotenv').config();
-require('./services/passport');
 
 const express = require('express');
 const bodyParser = require('body-parser');
 const cookieParser = require('cookie-parser');
 const methodOverride = require('method-override');
 const mongoose = require('mongoose');
-const session = require('express-session');
-const passport = require('passport');
 const cors = require('cors');
 
 const authRoute = require('./routes/auth');
@@ -16,18 +13,11 @@ const adminRoute = require('./routes/admin');
 const songRoute = require('./routes/song');
 const commentRoute = require('./routes/comment');
 const artistRoute = require('./routes/artist');
+const playlistRoute = require('./routes/playlist');
 
 const app = express();
 
 app.use(cors())
-
-app.use(session({
-    resave: false,
-    saveUninitialized: true,
-    secret: 'secret'
-})) 
-app.use(passport.initialize());
-app.use(passport.session());
 
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: true}));
@@ -42,6 +32,7 @@ app.use('/admin', adminRoute);
 app.use('/song', songRoute);
 app.use('/comment', commentRoute);
 app.use('/artist', artistRoute);
+app.use('/playlist', playlistRoute);
 
 const PORT = process.env.PORT || 8080;
 

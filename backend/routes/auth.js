@@ -8,4 +8,6 @@ router.post('/login', controller.login);
 
 router.post('/register', controller.register);
 
+router.post('/google', controller.loginGoogle)
+
 module.exports = router;

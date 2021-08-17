@@ -16,8 +16,8 @@ class SongController {
     }
 
     async getTopSong(req, res) {
-        const songs = await Song.find({}).sort({ likeCount: -1})
-        return res.status(200).send(songs);
+        const songs = await Song.find({}).sort({ likeCount: -1});
+        return res.status(200).send(songs.slice(0, 7));
     }
 
     async getCategory(req, res) {
@@ -34,6 +34,8 @@ class SongController {
         const user = await User.findById(req.body.userId);
 
         if(!song) return res.status(404).send(`No song with ${slug}`);
+
+        if(!user) return res.status(400).send(`No user with ${req.body.userId}`);
 
         if(!song.userLikes.includes(req.body.userId)) {
             await song.updateOne({ 

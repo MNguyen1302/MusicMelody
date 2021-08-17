@@ -20,7 +20,8 @@ const songSchema = new Schema({
     userLikes: [{
         type: mongoose.Schema.Types.ObjectId,
         ref: 'User',
-        default: []
+        default: [],
+        unique: true
     }],
     likeCount: { type: Number, default: 0},
 },{
