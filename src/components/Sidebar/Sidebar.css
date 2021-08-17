@@ -1,0 +1,120 @@
+.sidebar {
+    position: fixed;
+    z-index: 99;
+    width: 17.5rem;
+    top: 0;
+    bottom: 0;
+    height: 100%;
+    transition: all 0.3s ease-in-out;
+    background: var(--white);
+}
+.sidebar-side {
+    list-style: none;
+    padding: 0;
+}
+.sidebar img {
+    height: 50px;
+    width: 50px;
+}
+.sidebar-logo {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+}
+.sidebar-logo a {
+    text-decoration: none;
+    color: var(--light-green);
+    font-size: 1.6em;
+    font-family: 'Poppins', sans-serif;
+    transition: all 0.3s ease-in-out;
+}
+.header-logo {
+    display: flex;
+    align-items: center;
+    padding: 10px;
+}
+.icon-menu-sidebar {
+    box-sizing: border-box;
+}
+.menu-btn {
+    padding: 0 15px;
+}
+.menu-sidebar {
+    margin: 20px 0;
+    text-align: left;
+}
+.sidebar-header {
+    padding: 10px 30px!important;
+    font-family: 'Poppins', sans-serif;
+    font-size: 1em;
+    color: var(--light-green);
+    text-transform: uppercase;
+    letter-spacing: 2px;
+    transition: all 0.3s ease-in-out;
+}
+.sidebar-item {
+    padding: 10px;
+    cursor: pointer;
+}
+.sidebar-item span {
+    padding: 0 10px;
+    margin: 0 5px;
+}
+.sidebar-item-link {
+    text-decoration: none;
+    color: #4a525f;
+    font-size: 1.1em;
+    font-family: 'Poppins', sans-serif;
+    transition: all 0.3s ease-in-out;
+    display: block;
+    margin-left: 20px;
+}
+.toggle-bars {
+    display: flex;
+    color: var(--light-green);
+    font-size: 1.5em;
+    cursor: pointer;
+}
+.sidebar-item a i {
+    padding: 5px 10px;
+    font-size: 1em;
+    transition: all 0.3s ease-in-out;
+}
+.sidebar-item i {
+    margin: 0 8px;
+}
+.sidebar-item-link:hover {
+    color: var(--light-green);
+    background: rgba(255,255,255,0.1);
+    transition: all 0.3s ease-in-out;
+    border-radius: 50px 0 0 50px;
+}
+.activeLink {
+    border-right: solid 3px var(--light-green);
+    color: var(--light-green);
+    transition: all 0.3s ease-in-out;
+}
+.sidebar.active {
+    transition: all 0.3s ease-in-out;
+    width: 5rem;
+}
+.sidebar.active .sidebar-item a span,
+.sidebar.active .sidebar-header,
+.sidebar.active .sidebar-logo a {
+    display: none;
+}
+.sidebar.active .sidebar-item i,
+.sidebar.active .sidebar-item {
+    font-size: 1.1em;
+    transition: all 0.3s ease-in-out;
+    text-align: center;
+}
+.sidebar.active .sidebar-logo {
+    padding: 25px 0;
+    justify-content: center;
+}
+.navbar.active,
+.content-page.active {
+    margin-left: 5rem;
+    transition: all 0.3s ease-in-out;
+}

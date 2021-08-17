@@ -1,0 +1,21 @@
+.modal-container {
+    position: fixed;
+    bottom: 100px;
+    left: 45%;
+}
+.modal-wrapper {
+    width: 250px;
+    height: 55px;
+    background: var(--light-green);
+    color: white;
+    border-radius: 5px;
+    transition: all 0.3s ease;
+}
+.modal-content {
+    padding: 10px;
+    text-align: center;
+    line-height: 35px;
+    height: 100%;
+    font-family: 'Poppins', sans-serif;
+    font-weight: 600;
+}

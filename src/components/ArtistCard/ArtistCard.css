@@ -1,0 +1,53 @@
+.artist-card-box {
+    padding: 10px 7px;
+}
+.artist-image {
+    position: relative;
+    width: 200px;
+    height: 200px;
+    border-radius: 50%;
+    overflow: hidden;
+    cursor: pointer;
+}
+.artist-image img {
+    width: 100%;
+    height: 100%;
+    border-radius: 50%;
+    transition: transform 0.5s ease;
+}
+.artist-image:hover img {
+    transform: scale(1.5);
+}
+.artist-image:hover .artist-background {
+    opacity: 1;
+    transition: 0.5s ease;
+}
+.artist-background {
+    position: absolute;
+    opacity: 0;
+    width: 200px;
+    height: 200px;
+    border-radius: 10px;
+    background: rgba(0,0,0,0.3);
+    top: 0;
+    bottom: 0;
+    text-align: center;
+    font-size: 4em;
+    color: rgba(255,255,255,0.8);
+    line-height: 200px;
+    transition: 0.5s ease;
+}
+.artist-background i {
+    color: #fff;
+}
+.artist-info {
+    text-align: center;
+    font-family: 'Poppins', sans-serif;
+    font-weight: bold;
+    padding: 5px;
+    text-transform: capitalize;
+}
+.artist-info p {
+    color: var(--light-gray);
+    font-size: 15px;
+}

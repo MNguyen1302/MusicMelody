@@ -1,0 +1,77 @@
+import React, { useState } from 'react';
+import { useDispatch } from 'react-redux';
+import { Link } from 'react-router-dom';
+import moment from 'moment';
+
+import { deleteSong } from '../../../redux/actions/song';
+
+function TableSong({song, index}) {
+    const dispatch = useDispatch();
+    const [ isOpen, setIsOpen ] = useState(false);
+
+    const handleClickBtn = () => {
+        setIsOpen(!isOpen);
+    }
+
+    const closePopup = () => {
+        setIsOpen(!isOpen);
+    }
+
+    const handleDeleteSong = (id) => {
+        dispatch(deleteSong(id));
+        document.getElementById(id).remove();
+    }
+
+    return (
+        <tr
+            id={song._id}    
+        >
+            <td className="td-index">{index}</td>
+            <td className="td-image">
+                <img src={song.image} alt=""/>
+            </td>
+            <td>{song.name}</td>
+            <td>{song.artist}</td>
+            <td>{song.type}</td>
+            <td>{song.composer}</td>
+            <td>{moment(song.createdAt).format('lll')}</td>
+            <td className="td-action">
+                <Link 
+                    to={'/admin/edit/' + song.slug}
+                    style={{ color: 'lightgreen'}}
+                >
+                    <i className="ri-edit-box-line"></i>
+                </Link>
+            </td>
+            <td className="td-action">
+                <button className="btn-delete" onClick={handleClickBtn}>
+                    <i className="ri-delete-bin-6-line"></i>
+                </button>
+                <div 
+                    className='popup-delete-post' 
+                    style={{ display: isOpen ? 'block' : 'none' }}
+                >
+                    <div className="delete-popup-content">
+                        Do you want to delete this song?
+                    </div>
+                    <div className="btn-choose">
+                        <button 
+                            className="btn-yes"
+                            onClick={ () => handleDeleteSong(song._id) }
+                        >
+                            Yes
+                        </button>
+                        <button 
+                            className="btn-no"
+                            onClick={closePopup}
+                        >
+                            No
+                        </button>
+                    </div>
+                </div>
+            </td>
+        </tr>
+    )
+}
+
+export default TableSong
