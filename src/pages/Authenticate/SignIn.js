@@ -1,12 +1,13 @@
+
 import React, { useState } from 'react';
 import { 
     Link,
     useHistory } from 'react-router-dom';
-import { useDispatch } from 'react-redux';
-import cookies from 'js-cookie';
+import { useDispatch, useSelector } from 'react-redux';
+import { useGoogleLogin } from 'react-google-login';
 
-import { login } from '../../redux/actions/auth';
-
+import { FcGoogle } from 'react-icons/fc';
+import actions from '../../redux/actions/auth';
 import banner from '../../images/banner.png';
 import './Authenticate.css';
 
@@ -17,20 +18,22 @@ const initialState = {
     confirmPassword: ''
 }
 
+const clientId = '830776582006-4aaa58498g4atgvqij6cbk4lob513bc7.apps.googleusercontent.com';
+
 function SignIn() {
-    const userId = cookies.get('userId');
+    const { isLogged } = useSelector(state => state.user)
     const [ user, setUser ] = useState(initialState);
     const history = useHistory();
     const dispatch = useDispatch();
 
-    if(userId) {
+    if(isLogged) {
         history.push('/');
     }
     
     const handleSubmitLogin = async (e) => {
         e.preventDefault();
         
-        dispatch(login(user));
+        dispatch(actions.login(user, history));
     }   
     
     const handleChange = (e) => {
@@ -41,6 +44,23 @@ function SignIn() {
         })
     }
 
+    const onSuccess = async (res) => {
+        dispatch(actions.loginGoogle(res.tokenId));
+        history.push('/');
+    }
+
+    const onFailure = (res) => {
+        console.log(res);
+    }
+
+    const { signIn } = useGoogleLogin({
+        onSuccess,
+        onFailure,
+        clientId,
+        isSignedIn: true,
+        accessType: 'offline'
+    })
+
     return (
         <div className="signinup-container">
             <div className="signinup-wrapper">
@@ -50,7 +70,7 @@ function SignIn() {
                 <div className="form-container">
                     <div className="form-wrapper">
                         <div className="form-title">Sign In</div>
-                        <form action="" method="POST" onSubmit={handleSubmitLogin}>
+                        <form onSubmit={handleSubmitLogin}>
                             <div 
                                 className="signinup-input"
                             >
@@ -88,9 +108,12 @@ function SignIn() {
                             to="/auth/google" 
                             style={{ textDecoration: 'none' }}
                         >
-                            <div className="signin-with-gg-container">
+                            <div 
+                                className="signin-with-gg-container"
+                                onClick={signIn}    
+                            >
                                 <div className="signin-with-gg-icon">
-                                    <i className="ri-google-fill"></i>
+                                    <FcGoogle className="google-icon"/>
                                 </div>
                                 <div className="signin-with-gg-text">
                                     <span>Sign in with Google</span>
@@ -104,4 +127,4 @@ function SignIn() {
     )
 }
 
-export default SignIn
+export default SignIn;

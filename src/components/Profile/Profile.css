@@ -149,3 +149,26 @@
 .tab-profile-pane.active {
     display: flex;
 }
+@media screen and (max-width: 1200px) {
+    .tab-profile-item {
+        padding: 10px 30px;
+        flex-grow: 1;
+    }
+}
+@media screen and (max-width: 900px) {
+    .input-edit input {
+        width: auto;
+    }
+}
+@media screen and (max-width: 670px) {
+    .tabs-profile {
+        display: block;
+        margin: 10px 0;
+    }
+    .tab-profile-item {
+        margin: 15px;
+    }
+    .tab-profile-pane:nth-child(2) {
+        margin-bottom: 60px;
+    }
+}

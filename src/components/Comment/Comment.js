@@ -3,22 +3,29 @@ import { useHistory } from 'react-router-dom';
 import { useDispatch, useSelector } from 'react-redux';
 import cookies from 'js-cookie';
 
-import { postComment } from '../../redux/actions/song';
+import songs from '../../redux/actions/songs';
+import song from '../../redux/actions/song';
+import Recommend from './Recommend';
 import CommentItem from './CommentItem';
 
 function Comment(props) {
     const userId = cookies.get('userId');
 
     const { user } = useSelector(state => state.user);
+    const { trending } = useSelector(state => state.songs);
     const dispatch = useDispatch();
     const history = useHistory();
 
     const [ formData, setFormData ] = useState({ content: '' });
 
+    useEffect(() => {
+        dispatch(songs.getTopSong());
+    }, [trending])
+
     const handleSubmitCmt = async (e) => {
         e.preventDefault();
         
-        dispatch(postComment(
+        dispatch(song.postComment(
             formData.content,
             userId,
             props.slug,
@@ -76,8 +83,18 @@ function Comment(props) {
                     </div>
                 </div>
                 <div className="song-detail-recommend">
-                    <div className="song-detail-recommend-title">
-                        Recommend
+                    <div className="song-recommend-title">
+                        <span>Recommend</span>
+                    </div>
+                    <div className="song-recommend-container">
+                        {
+                            trending.slice(0, 5).map(song => {
+                                return  <Recommend
+                                            key={song._id}
+                                            song={song}
+                                        />
+                            })
+                        }
                     </div>
                 </div>
             </div>

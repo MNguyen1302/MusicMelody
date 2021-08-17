@@ -2,8 +2,9 @@ import React, { useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { Link } from 'react-router-dom';
 
-import { getAllArtist } from '../../redux/actions/artist';
+import actions from '../../redux/actions/artist';
 import ArtistCard from '../ArtistCard/ArtistCard';
+import { RiArrowRightSLine } from 'react-icons/ri';
 import './ArtistContainer.css';
 
 function ArtistContainer(props) {
@@ -11,7 +12,7 @@ function ArtistContainer(props) {
     const dispatch = useDispatch();
 
     useEffect(() => {
-        dispatch(getAllArtist());
+        dispatch(actions.getAllArtist());
     }, [artists])
 
     return (
@@ -37,10 +38,10 @@ function ArtistContainer(props) {
                         // </div> 
                         ''
                     ) : (
-                        <div className="viewmore">
+                        <div className="see-all">
                             <Link to="/allartist">
                                 <h3>See All</h3>
-                                <i className="ri-arrow-right-s-line"></i>
+                                <RiArrowRightSLine/>
                             </Link>
                         </div>
                     )
@@ -48,7 +49,7 @@ function ArtistContainer(props) {
             </div>
             <div className="artist-wrapper">
                 {
-                    artists.slice(0, 6).map(artist => {
+                    artists.slice(0, 7).map(artist => {
                         return  <ArtistCard
                                     key={artist._id}
                                     artist={artist}

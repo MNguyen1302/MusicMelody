@@ -1,5 +1,6 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
+import { RiUserLine, RiSettings2Line, RiLogoutBoxLine } from 'react-icons/ri'
 
 function HeaderDropdown(props) {
     return (
@@ -8,18 +9,18 @@ function HeaderDropdown(props) {
                 <Link 
                     to="/profile"
                 >
-                    <i className="ri-user-line"></i>
+                    <RiUserLine/>
                     <span>Profile</span>
                 </Link>
             </div>
             <div className="user-choose">
                 <Link>
-                    <i className="ri-settings-2-line"></i>
+                    <RiSettings2Line/>
                     <span>Setting</span>
                 </Link>
             </div>
             <div className="user-logout" onClick={props.logout}>
-                <i className="ri-logout-box-line"></i>
+                <RiLogoutBoxLine/>
                 <span>Logout</span>
             </div>
         </div>

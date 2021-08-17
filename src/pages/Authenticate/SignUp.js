@@ -2,10 +2,9 @@ import React, { useState } from 'react';
 import { 
     Link,
     useHistory } from 'react-router-dom';
-import { useDispatch } from 'react-redux';
-import cookies from 'js-cookie';
+import { useDispatch, useSelector } from 'react-redux';
 
-import { register } from '../../redux/actions/auth';
+import actions from '../../redux/actions/auth';
 import banner from '../../images/banner.png';
 import './Authenticate.css';
 
@@ -17,21 +16,21 @@ const initialState = {
 }
 
 function SignUp() {
-    const userId = cookies.get('userId');
+    const { isLogged } = useSelector(state => state.user);
     const [ user, setUser ] = useState(initialState);
     const [ errors, setErrors ] = useState([]);
 
     const history = useHistory();
     const dispatch = useDispatch();
 
-    if(userId) {
+    if(isLogged) {
         history.push('/');
     }
     
     const handleSubmitRegister = async (e) => {
         e.preventDefault();
 
-        dispatch(register(user, history));
+        dispatch(actions.register(user, history));
     }
     const handleChange = (e) => {
         const { name, value } = e.target;
@@ -108,4 +107,4 @@ function SignUp() {
     )
 }
 
-export default SignUp
+export default SignUp;

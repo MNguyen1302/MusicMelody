@@ -1,4 +1,5 @@
 import React from 'react';
+import { AiOutlineMore } from 'react-icons/ai';
 
 function ArtistTrack({song, index}) {
     return (
@@ -12,7 +13,7 @@ function ArtistTrack({song, index}) {
             </div>
             <div className="artist-track-icon">
                 <i className="far fa-heart"></i>
-                <i className="fas fa-ellipsis-v"></i>
+                <AiOutlineMore/>
             </div>
         </div>
     )

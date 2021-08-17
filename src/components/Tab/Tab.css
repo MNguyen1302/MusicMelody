@@ -51,7 +51,7 @@
     padding: 8px 0;
 }
 .song-list-number {
-    width: 50px;
+    width: 60px;
     height: 50px;
     text-align: center;
     line-height: 50px;
@@ -66,6 +66,7 @@
     text-align: left;
     display: flex;
     flex-grow: 1;
+    align-items: center;
 }
 .song-list-info {
     display: flex;
@@ -84,12 +85,70 @@
     font-size: 0.9em;
 }
 .song-list-icon {
+    position: relative;
     display: flex;
     cursor: pointer;
-    padding: 0 20px;
+    padding: 0 30px;
+    align-items: baseline;
 }
 .song-list-likecount {
     font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif!important;
     font-weight: lighter;
     color: var(--light-dark);
+    padding: 0 5px;
+}
+.artist-list-info {
+    padding: 0 10px;
+}
+.artist-list-info a {
+    color: var(--light-dark);
+    text-decoration: none;
+    font-family: 'Poppins', sans-serif;
+    font-weight: 600;
+    font-size: 0.9em;
+}
+.tab-popup-more {
+    position: absolute;
+    padding: 2px;
+    width: 160px;
+    height: 190px;
+    right: 60px;
+    top: 0px;
+    box-shadow: 0 16px 24px rgb(0 0 0 / 10%), 0 6px 8px rgb(0 0 0 / 10%);
+    background: var(--light-green);
+    color: var(--white);
+    z-index: 99;
+    border-radius: 5px;
+}
+.tab-popup-more ul {
+    list-style: none;
+}
+.tab-popup-more ul li {
+    padding: 6px 20px;
+    font-family: 'Poppins', sans-serif;
+    font-weight: 600;
+}
+.tab-popup-more ul li a {
+    text-decoration: none;
+    color: var(--white);
+    display: block;
+}
+@media screen and (max-width: 1300px) {
+    .tab-container {
+        width: 100%;
+    }
+    .tabs-title {
+        justify-content: space-around;
+    }
+}
+@media screen and (max-width: 450px) {
+    .song-list-icon {
+        padding: 0 10px;
+    }
+    .song-list-number {
+        width: 50px;
+    }
+    .tab-pane-block {
+        font-size: 0.75em;
+    }
 }

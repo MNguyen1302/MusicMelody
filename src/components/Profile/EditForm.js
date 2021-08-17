@@ -2,7 +2,8 @@ import React, { useState } from 'react';
 import { useDispatch } from 'react-redux';
 import cookies from 'js-cookie';
 
-import { editProfile } from '../../redux/actions/user';
+import actions from '../../redux/actions/user';
+import { RiImageEditLine } from 'react-icons/ri';
 import avatar from '../../images/noavatar.svg';
 
 function ProfileEdit(props) {
@@ -33,7 +34,7 @@ function ProfileEdit(props) {
             formProfile.address = props.user.address;
         }
 
-        dispatch(editProfile(
+        dispatch(actions.editProfile(
             formProfile.avatar,
             formProfile.firstname,
             formProfile.lastname,
@@ -72,23 +73,13 @@ function ProfileEdit(props) {
             onSubmit={handleSubmitEdit}
         >
             <div className="form-edit-avatar">
-                {
-                    imgSrc ? (
-                        <img 
-                            src={imgSrc} 
-                            alt="user-avatar" 
-                            id="image-preview"
-                        />  
-                    ) : (
-                        <img 
-                            src={props.user.avatar ? props.user.avatar : avatar} 
-                            alt="user-avatar" 
-                            id="image-preview"
-                        />  
-                    )
-                }
+                <img 
+                    src={imgSrc ? imgSrc : props.user.avatar} 
+                    alt="user-avatar" 
+                    id="image-preview"
+                />  
                 <div className="image-edit">
-                    <i className="ri-image-edit-line"></i>
+                    <RiImageEditLine/>
                     <input 
                         id="file-upload" 
                         name="avatar" 

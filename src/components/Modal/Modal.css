@@ -2,14 +2,13 @@
     position: fixed;
     bottom: 100px;
     left: 45%;
+    animation: scaleUp 3.5s cubic-bezier(0.165, 0.840, 0.440, 1.000) forwards;
 }
 .modal-wrapper {
-    width: 250px;
+    max-width: 250px;
     height: 55px;
     background: var(--light-green);
-    color: white;
     border-radius: 5px;
-    transition: all 0.3s ease;
 }
 .modal-content {
     padding: 10px;
@@ -18,4 +17,18 @@
     height: 100%;
     font-family: 'Poppins', sans-serif;
     font-weight: 600;
+} 
+.modal-content span {
+    color: white!important;
+}
+@keyframes scaleUp {
+    0% {
+        transform: scale(0.8) translateY(100px);
+    }
+    16.6667%, 63.3333% {
+        transform: scale(1) translateY(0px);
+    }
+    100% {
+        transform: scale(0.8) translateY(100px);
+    }
 }

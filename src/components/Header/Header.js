@@ -1,71 +1,117 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, useRef } from 'react';
 import {
     Link,
     useHistory } from 'react-router-dom';
 import { useDispatch, useSelector } from 'react-redux';
-import decode from 'jwt-decode';
+import {
+    RiNotification3Line, 
+    RiTShirt2Line, 
+    RiSearchLine, 
+    RiArrowRightSLine, 
+    RiArrowLeftSLine, 
+    RiBarChartHorizontalLine } from 'react-icons/ri';
 import cookies from 'js-cookie';
 
-import { getUser, logout } from '../../redux/actions/user';
-import avatar from '../../images/noavatar.svg';
+import actions from '../../redux/actions/user';
 import HeaderDropdown from './HeaderDropdown';
+import Search from '../Search/Search';
 import './Header.css';
 
-function Header() {
-    const token = localStorage.getItem('userToken');
+function Header({toggleBar}) {
     const userId = cookies.get('userId');
 
     const { user } = useSelector(state => state.user);
+    const { songs } = useSelector(state => state.songs);
+    
+    const [ isDropdown, setIsDropdown ] = useState(false);
+    const [ isOpen, setIsOpen ] = useState(false);
+    const [ songSearch, setSongSearch ] = useState([]);
+    const [ showSearchModal, setShowSearchModal ] = useState(false);
     const dispatch = useDispatch();
     const history = useHistory();
+    const ref = useRef(null);
 
     useEffect(() => {
-        if(token) {
-            const decodedToken = decode(token);
-
-            if(decodedToken.exp * 1000 < new Date().getTime() || !decodedToken) handleLogout();
-        } else {
-            handleLogout()
-        }
-        dispatch(getUser(userId, history));
-        
+        dispatch(actions.getUser(userId, history));
     }, [userId])
 
-    const handleLogout = () => {
-        dispatch(logout(history));
-        return;
+    const handleChangeSearch = (e) => {
+        let arr = [];
+        for(let i in songs) {
+            if(songs[i].name.toLowerCase().includes(e.target.value)) {
+                arr.push(songs[i]);
+            }
+        }
+        setSongSearch(arr);
     }
 
-    const [ isDropdown, setIsDropdown ] = useState(false);
+    const handleLogout = () => {
+        dispatch(actions.logout(history));
+    }
 
     const toggleDropdown = () => {
         setIsDropdown(!isDropdown);
+        console.log(songSearch)
     }
-    let dropdown = isDropdown === true ? <HeaderDropdown logout={handleLogout}/> : '';
+
+    const handleToggleBar = () => {
+        toggleBar(!isOpen);
+    }
+
+    const handleShowSearchModal = () => {
+        setShowSearchModal(true);
+    }
+
+    const closeSearchModal = (status) => {
+        setShowSearchModal(status);
+    }
+
+    const handleClickOutside = (e) => {
+        if(ref.current && !ref.current.contains(e.target)) {
+            toggleBar(false);
+        }
+    };
+
+    useEffect(() => {
+        document.addEventListener('click', handleClickOutside, true);
+        return () => {
+            document.removeEventListener('click', handleClickOutside, true);
+        }
+    }, [ref])
 
     return (
-        <nav className="navbar">
-            <div className="toggle-bar-responsive">
-                <i className="ri-bar-chart-horizontal-line"></i>
+        <div>
+            <nav className="navbar">
+            <div 
+                ref={ref}
+                className="toggle-bar-responsive" 
+                onClick={handleToggleBar}
+            >
+                <RiBarChartHorizontalLine/>
             </div>
             <div className="btn-back-control">
                 <button 
                     className="btn-back"
                     onClick={ () => history.goBack() }    
                 >
-                    <i className="ri-arrow-left-line"></i>
+                    <RiArrowLeftSLine/>
                 </button>
                 <button 
                     className="btn-forward"
                     onClick={ () => history.goForward() }    
                 >
-                    <i className="ri-arrow-right-line"></i>
+                    <RiArrowRightSLine/>
                 </button>
             </div>
             <div className="search-box">
                 <form className="search-form">
-                    <input type="search" placeholder="Search here..." />
-                    <i className="ri-search-line btn-search"></i>
+                    <input 
+                        type="text" 
+                        placeholder="Search your songs, artists, album..." 
+                        onClick={handleShowSearchModal}
+                        onChange={handleChangeSearch}    
+                    />
+                    <RiSearchLine className="btn-search"/>
                 </form>
             </div>
             <div className="auth-box">
@@ -73,23 +119,21 @@ function Header() {
                 <div className="user-container">
                     <div className="change-theme-container">
                         <div className="btn-change-theme">
-                            <i className="ri-t-shirt-2-line"></i>
+                            <RiTShirt2Line/>
                         </div>
                     </div>
                     <div className="notifications-container">
                         <div className="btn-notification">
-                            <i className="ri-notification-3-line"></i>
+                            <RiNotification3Line/>
                         </div>
                     </div>
                     <div className="user-info">
                         <div className="user-avatar" onClick={toggleDropdown}>
-                            { user.avatar ? (
-                                <img src={user.avatar} alt=""/>
-                            ) : (
-                                <img src={avatar} alt="" /> 
-                            ) }
+                            <img src={user.avatar} alt=""/>
                         </div>
-                        {dropdown}
+                        {
+                            isDropdown === true && <HeaderDropdown logout={handleLogout}/>
+                        }
                     </div>
                 </div>
             ) : (
@@ -104,9 +148,10 @@ function Header() {
                     </div>
                 )
             ) }
-                
             </div>
         </nav>
+        { showSearchModal && <Search songs={songSearch} closeSearchModal={closeSearchModal}/> }
+        </div>
     )
 }
 

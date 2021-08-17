@@ -18,7 +18,13 @@
 .content-page {
     margin-left: 17.5rem;
     margin-top: 80px;
-    min-height: 100vh;
+    min-height: 90vh;
     background: rgba(0 0 0 / 2%);
     transition: all 0.4s ease-in-out;
+}
+@media screen and (max-width: 1300px) {
+    .content-page {
+        margin-left: 0;
+        transition: all 0.4s ease-in-out;
+    }
 }

@@ -3,7 +3,8 @@ import { useDispatch } from 'react-redux';
 import { Link } from 'react-router-dom';
 import moment from 'moment';
 
-import { deleteSong } from '../../../redux/actions/song';
+import actions from '../../../redux/actions/admin';
+import { RiEditBoxLine, RiDeleteBin6Line } from 'react-icons/ri';
 
 function TableSong({song, index}) {
     const dispatch = useDispatch();
@@ -18,7 +19,7 @@ function TableSong({song, index}) {
     }
 
     const handleDeleteSong = (id) => {
-        dispatch(deleteSong(id));
+        dispatch(actions.deleteSong(id));
         document.getElementById(id).remove();
     }
 
@@ -40,12 +41,12 @@ function TableSong({song, index}) {
                     to={'/admin/edit/' + song.slug}
                     style={{ color: 'lightgreen'}}
                 >
-                    <i className="ri-edit-box-line"></i>
+                    <RiEditBoxLine/>
                 </Link>
             </td>
             <td className="td-action">
                 <button className="btn-delete" onClick={handleClickBtn}>
-                    <i className="ri-delete-bin-6-line"></i>
+                    <RiDeleteBin6Line/>
                 </button>
                 <div 
                     className='popup-delete-post' 

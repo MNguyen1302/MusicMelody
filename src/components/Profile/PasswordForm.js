@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
 import { useDispatch } from 'react-redux';
 import cookies from 'js-cookie';
-import { changePassword } from '../../redux/actions/user';
+import actions from '../../redux/actions/user';
 
 function FormChangePass() {
     const userId = cookies.get('userId');
@@ -29,7 +29,7 @@ function FormChangePass() {
             })
             return;
         }
-        dispatch(changePassword(userId, formData));
+        dispatch(actions.changePassword(userId, formData));
     }
 
     const handleChange = (e) => {

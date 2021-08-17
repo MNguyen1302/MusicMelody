@@ -15,6 +15,7 @@ import ArtistDetailPage from './pages/ArtistDetail/ArtistDetailPage';
 import AllSongs from './pages/AllSongs/AllSongs';
 import Profile from './pages/Profile/Profile';
 import Favourite from './pages/Favourite/Favourite';
+import Playlist from './pages/Playlist/Playlist';
 
 import SignIn from './pages/Authenticate/SignIn';
 import SignUp from './pages/Authenticate/SignUp';
@@ -28,23 +29,28 @@ function App() {
     return (
         <Router>
             <div className="App">
-                <Layout/>
-                <ScrollToTop/>
+               
                 <Switch>
-                    <Route path='/' exact component={Home}></Route>
-                    <Route path='/song/:slug' exact component={SongDetailPage}></Route>
-                    <Route path='/category' exact component={CategoryPage}></Route>
-                    <Route path='/genre/:type' exact component={SongCategoryPage}></Route>
-                    <Route path='/artist/:slug' exact component={ArtistDetailPage}></Route>
-                    <Route path='/allsongs' exact component={AllSongs}></Route>
-                    <Route path='/profile' exact component={Profile}></Route>
-                    <Route path='/favourites' exact component={Favourite}></Route>
                     <Route path='/auth/login' exact component={SignIn}></Route>
                     <Route path='/auth/register' exact component={SignUp}></Route>
-                    <Route path='/admin/store/song' exact component={Admin_MyPost}></Route>
-                    <Route path='/admin/create/song' exact component={Admin_PostSong}></Route>
-                    <Route path='/admin/create/artist' exact component={Admin_PostArtist}></Route>
-                    <Route path='/admin/edit/:slug' exact component={Admin_Edit}></Route> 
+
+                    <Route>
+                        <Layout/>
+                        <ScrollToTop/>
+                        <Route path='/' exact component={Home}></Route>
+                        <Route path='/song/:slug' exact component={SongDetailPage}></Route>
+                        <Route path='/category' exact component={CategoryPage}></Route>
+                        <Route path='/genre/:type' exact component={SongCategoryPage}></Route>
+                        <Route path='/artist/:slug' exact component={ArtistDetailPage}></Route>
+                        <Route path='/allsongs' exact component={AllSongs}></Route>
+                        <Route path='/profile' exact component={Profile}></Route>
+                        <Route path='/favourites' exact component={Favourite}></Route>
+                        <Route path='/playlist/:id' exact component={Playlist}></Route>
+                        <Route path='/admin/store/song' exact component={Admin_MyPost}></Route>
+                        <Route path='/admin/create/song' exact component={Admin_PostSong}></Route>
+                        <Route path='/admin/create/artist' exact component={Admin_PostArtist}></Route>
+                        <Route path='/admin/edit/:slug' exact component={Admin_Edit}></Route> 
+                    </Route>
                 </Switch>
             </div>
         </Router>

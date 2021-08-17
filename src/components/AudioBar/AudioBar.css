@@ -165,3 +165,40 @@ input[type=range]::-ms-fill-lower {
 .volume-toggle.muted .icon-unmute {
     display: none;
 }
+@media screen and (max-width: 1300px) {
+    .player {
+        width: 100%;
+    }
+    .audio-info-bar {
+        display: none;
+    }
+    .audio-control-bar {
+        flex-wrap: wrap;
+    }
+}
+@media screen and (max-width: 900px) {
+    input[type="range"] {
+        width: 530px;
+    }
+}
+@media screen and (max-width: 1200px) {
+    .extra-control {
+        display: none;
+    }
+    .audio-control-bar {
+        justify-content: center;
+    }
+}
+@media screen and (max-width: 670px) {
+    input[type="range"] {
+        width: 300px;
+    }
+}
+@media screen and (max-width: 450px) {
+    .current-time, .duration-time {
+        font-size: 0.95em;
+    }
+    input[type="range"] {
+        width: 220px;
+    }
+}

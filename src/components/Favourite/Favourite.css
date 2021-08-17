@@ -1,29 +1,72 @@
 .favourite-wrapper {
-    text-align: left;
-    margin: 10px 0;
+   display: flex;
+   margin: 0 60px;
+   justify-content: space-between;
+   flex-wrap: wrap;
 }
-.favourite-header {
+.favourite-box-left {
+    position: fixed;
+    flex-grow: 1;
+}
+.favourite-box-right {
+    flex-grow: 2;
+    margin-left: 20rem;
+}
+.favourite-detail {
+    margin: 40px 0;
+}
+.favourite-detail-image {
     position: relative;
-    width: 100%;
-    height: 350px;
+    width: 300px;
+    height: 300px;
+    border: double 3px rgba(0 0 0 / 30%);
+    border-radius: 5px;
+    margin: auto;
 }
-.favourite-header::before {
-    content: '';
-    position: absolute;
-    top: 0;
-    left: 0;
-    height: 350px;
+.favourite-detail-image img {
     width: 100%;
-    background: linear-gradient(rgba(240, 174, 174, 0.5), rgba(255,255,255,0.3));
+    height: 100%;
 }
-.favourite-header img {
-    width: 250px;
-    height: 250px;
-    padding: 10px;
-    margin: 60px;
+.favourite-detail-title {
+    margin-top: 25px;
+    padding: 20px 0;
+    font-family: 'Poppins', sans-serif;
+    font-weight: 600;
+    text-align: center;
+    font-size: 1.8em;
+    color: #333;
+}
+.favourite-user-info {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+.favourite-user-info img {
+    width: 25px;
+    height: 25px;
+    border-radius: 50%;
+}
+.favourite-user-info span {
+    padding: 0 10px;
+    color: rgba(0 0 0 / 35%);
+}
+.favourite-detail-extra {
+    margin: 10px 0;
+    text-align: center;
+}
+.favourite-detail-extra span {
+    padding: 0 20px;
+    font-family: 'Poppins', sans-serif;
+    font-weight: 600;
+    font-size: 0.9em;
+    color: rgba(0 0 0 / 35%);
+    border-right: solid 1px rgba(0 0 0 / 35%);
+}
+.favourite-detail-extra span:last-child {
+    border: none;
 }
 .favourite-song-container {
-    margin: 30px 60px 100px 60px;
+    margin: 40px 0px 40px 70px;
 }
 .favourite-track {
     display: flex;
@@ -39,10 +82,33 @@
     background: var(--white);
     transition: 0.3s ease;
 }
+.favourite-track.active {
+    background: rgba(0 0 0 /3%);
+    border-radius: 5px;
+    transition: 0.3s ease;
+    color: var(--light-green);
+}
+.favourite-track.active .favourite-track-info a:first-child {
+    color: var(--light-green);
+}
+.favourite-track.active .favourite-icon-pause {
+    display: inline-block;
+}
+.favourite-track.active .favourite-icon-play {
+    display: none;
+    opacity: 1;
+}
 .favourite-track:hover {
     background: rgba(0 0 0 /3%);
     border-radius: 5px;
     transition: 0.3s ease;
+}
+.favourite-track:hover .favourite-track-play {
+    opacity: 1;
+    transition: 0.3s ease;
+}
+.favourite-icon-pause {
+    display: none;
 }
 .favourite-track-index {
     width: 60px;
@@ -51,6 +117,7 @@
     text-align: center;
 }
 .favourite-track-image {
+    position: relative;
     width: 50px;
     height: 50px;
     border-radius: 3px;
@@ -60,32 +127,226 @@
     height: 100%;
     border-radius: 3px;
 }
+.favourite-track-play {
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    top: 0;
+    left: 0;
+    text-align: center;
+    line-height: 50px;
+    font-size: 2em;
+    color: var(--light-green);
+    opacity: 0;
+    transition: 0.3s ease;
+}
 .favourite-track-info {
     padding: 0 20px;
     display: flex;
     flex-direction: column;
     flex-grow: 2;
 }
-.favourite-track-info span:last-child {
+.favourite-track-info a {
+    text-decoration: none;
+    color: var(--light-dark);
+    font-size: 1em;
+}
+.favourite-track-info a:last-child {
     font-size: 0.9em;
     color: gray;
 }
 .favourite-track-icon {
+    position: relative;
     padding: 0 10px;
 }
 .fa-ellipsis-v {
     padding: 0 10px;
 }
-.favourite-title {
-    display: flex;
-    font-family: 'Poppins', sans-serif;
-    color: var(--light-dark);
-    font-weight: 600;
-}
-.favourite-title-index {
-    width: 60px;
-    text-align: center;
-}
 .favourite-vertical {
     margin: 20px 0;
+    border: dotted 3px rgb(220, 252, 220);
+}
+.btn-find {
+    margin: 15px 0;
+}
+.btn-find a {
+    text-decoration: none;
+    padding: 15px 20px;
+    font-size: 1em;
+    font-family: 'Poppins', sans-serif;
+    font-weight: 600;
+    text-transform: uppercase;
+    background: var(--light-green);
+    color: var(--white);
+    border: none;
+    border-radius: 50px;
+    cursor: pointer;
+    transition: all 0.3s;
+}
+.btn-find a:hover {
+    color: var(--light-green);
+    background: var(--white);
+    border-radius: 50px;
+    transition: all 0.3s;
+}
+.favourite-popup-more {
+    position: absolute;
+    padding: 2px;
+    height: 230px;
+    width: 190px;
+    right: 35px;
+    top: 2px;
+    color: white;
+    background: var(--light-green);
+    border-radius: 5px;
+    box-shadow: 0 16px 24px rgb(0 0 0 / 10%), 0 6px 8px rgb(0 0 0 / 10%);
+    z-index: 99;
+}
+.favourite-popup-more ul {
+    list-style: none;
+}
+.favourite-popup-more ul li {
+    padding: 10px 20px;
+    font-family: 'Poppins', sans-serif;
+}
+.favourite-title {
+    margin: 0 80px;
+    font-family: 'Poppins', sans-serif;
+    font-size: 1.5em;
+    font-weight: 600;
+    color: var(--light-dark);
+}
+.favourite-artist-container {
+    display: flex;
+    margin: 20px 60px;
+}
+.favourite-artist-card-box {
+    padding: 10px 7px;
+}
+.favourite-artist-image {
+    position: relative;
+    width: 150px;
+    height: 150px;
+    border-radius: 50%;
+    overflow: hidden;
+    cursor: pointer;
+}
+.favourite-artist-image img {
+    width: 100%;
+    height: 100%;
+    border-radius: 50%;
+    transition: transform 0.5s ease;
+}
+.favourite-artist-image:hover img {
+    transform: scale(1.5);
+}
+.favourite-artist-image:hover .favourite-artist-background {
+    opacity: 1;
+    transition: 0.5s ease;
+}
+.favourite-artist-background {
+    position: absolute;
+    opacity: 0;
+    width: 100%;
+    height: 100%;
+    border-radius: 10px;
+    background: rgba(0,0,0,0.3);
+    top: 0;
+    bottom: 0;
+    text-align: center;
+    font-size: 4em;
+    color: rgba(255,255,255,0.8);
+    line-height: 200px;
+    transition: 0.5s ease;
+}
+.favourite-artist-background i {
+    color: #fff;
+}
+.favourite-artist-info {
+    text-align: center;
+    font-family: 'Poppins', sans-serif;
+    font-weight: bold;
+    padding: 5px;
+    text-transform: capitalize;
+    color: rgba(0 0 0 / 50%);
+}
+.favourite-song-container-status {
+    margin: 200px auto;
+    font-family: 'Poppins', sans-serif;
+    text-align: center;
+    font-weight: 600;
+}
+.favourite-song-container-text {
+    font-size: 1.5em;
+    color: var(--light-dark);
+}
+.favourite-song-container-text span:last-child {
+    font-size: 0.7em;
+}
+.popup-playlist {
+    position: absolute;
+    padding: 2px;
+    width: 180px;
+    color: white;
+    background: var(--light-green);
+    border-radius: 5px;
+    box-shadow: 0 16px 24px rgb(0 0 0 / 10%), 0 6px 8px rgb(0 0 0 / 10%);
+    z-index: 10;
+    margin-bottom: 20px;
+    left: 180px;
+    bottom: 0;
+    opacity: 0;
+    transition: all 0.4s;
+}
+.popup-playlist-title:hover .popup-playlist {
+    opacity: 1;
+    transition: all 0.4s;
+}
+.btn-favourite {
+    position: absolute;
+    bottom: -45px;
+    font-size: 6em!important;
+    left: 90px;
+}
+@media screen and (max-width: 1200px) {
+    .favourite-wrapper {
+        flex-direction: column;
+    }
+    .favourite-box-left {
+        position: relative;
+    }
+    .favourite-box-right,
+    .favourite-song-container,
+    .favourite-title {
+        margin: 0;
+    }
+    .favourite-artist-container {
+        margin: 10px 0;
+    }
+}
+@media screen and (max-width: 670px) {
+    .favourite-wrapper {
+        margin: 0 30px;
+    }
+    .favourite-track-info a {
+        font-size: 0.8em;
+    }
+    .favourite-track-info a:last-child {
+        font-size: 0.7em;
+    }
+    .favourite-artist-container {
+        margin: 10px 0 80px 0;
+    }
+    .favourite-artist-image {
+        width: 80px;
+        height: 80px;
+    }
+    .favourite-artist-info {
+        font-size: 0.9em;
+    }
+}
+@media screen and (max-width: 450px) {
+    .favourite-track-index {
+        width: 38px;
+    }
 }

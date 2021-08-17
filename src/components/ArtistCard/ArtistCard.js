@@ -1,12 +1,13 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
+
 import './ArtistCard.css';
 
 function ArtistCard({artist}) {
     return (
         <div className="artist-card-box">
             <Link 
-                to={'/artist/' + artist.artistSlug}
+                to={`/artist/${artist.artistSlug}`}
             >
                 <div className="artist-image">
                     <img src={artist.image} alt={artist.name} />

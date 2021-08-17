@@ -1,0 +1,330 @@
+.playlist-wrapper {
+    display: flex;
+    margin: 0 60px;
+    justify-content: space-between;
+    flex-wrap: wrap;
+}
+.playlist-box-left {
+    position: fixed;
+    flex-grow: 1;
+}
+.playlist-box-right {
+    flex-grow: 2;
+    margin-left: 24rem;
+}
+.playlist-detail {
+    margin: 40px 0;
+}
+.playlist-detail-image {
+    position: relative;
+    width: 300px;
+    height: 300px;
+    border-radius: 5px;
+    margin: auto;
+    box-shadow: 0 16px 24px rgb(0 0 0 / 10%), 0 6px 8px rgb(0 0 0 / 10%);
+}
+.playlist-detail-image img {
+    width: 100%;
+    height: 100%;
+    border-radius: 5px;
+}
+.playlist-edit {
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    text-align: center;
+    line-height: 300px;
+    color: white;
+    font-size: 6em;
+    top: 0;
+    left: 0;
+    opacity: 0;
+    transition: all 0.4s;
+}
+.playlist-detail-image:hover .playlist-edit {
+    opacity: 1;
+    transition: all 0.4s;
+}
+.playlist-detail-title {
+    padding: 30px 0;
+    margin-top: 10px;
+    font-family: 'Poppins', sans-serif;
+    font-weight: 600;
+    text-align: center;
+    font-size: 1.8em;
+    color: #333;
+}
+.playlist-user-info {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-family: 'Poppins', sans-serif;
+    font-weight: 600;
+}
+.playlist-user-info img {
+    width: 25px;
+    height: 25px;
+    border-radius: 50%;
+}
+.playlist-user-info span {
+    padding: 0 10px;
+    color: rgba(0 0 0 / 35%);
+}
+.playlist-detail-extra {
+    margin: 10px 0 5px 0;
+    text-align: center;
+    font-family: 'Poppins', sans-serif;
+}
+.playlist-detail-extra span {
+    padding: 0 20px;
+    font-weight: 600;
+    font-size: 0.9em;
+    color: rgba(0 0 0 / 35%);
+    border-right: solid 1px rgba(0 0 0 / 35%);
+}
+.playlist-detail-extra span:last-child {
+    border: none;
+}
+.playlist-vertical {
+    margin: 20px 0;
+    border: dotted 3px rgb(220, 252, 220);
+}
+.btn-find {
+    margin: 20px 0;
+}
+.btn-find a {
+    text-decoration: none;
+    padding: 10px 15px;
+    font-size: 1em;
+    font-family: 'Poppins', sans-serif;
+    font-weight: 600;
+    text-transform: uppercase;
+    background: var(--light-green);
+    color: var(--white);
+    border: none;
+    border-radius: 50px;
+    cursor: pointer;
+    transition: all 0.3s;
+}
+.btn-find a:hover {
+    color: var(--light-green);
+    background: var(--white);
+    border-radius: 50px;
+    transition: all 0.3s;
+}
+.playlist-title {
+    margin: 0 80px;
+    font-family: 'Poppins', sans-serif;
+    font-size: 1.5em;
+    font-weight: 600;
+    color: var(--light-dark);
+}
+.playlist-song-container-status {
+    margin: 200px auto;
+    font-family: 'Poppins', sans-serif;
+    text-align: center;
+}
+.playlist-song-container-text {
+    font-size: 1.5em;
+}
+.playlist-detail-time,
+.playlist-detail-description {
+    text-align: center;
+    color: rgba(0 0 0 /30%);
+    font-family: 'Poppins', sans-serif;
+}
+.playlist-detail-description {
+    margin: 20px 0;
+    padding: 10px 0;
+    font-size: 1.1em;
+    font-weight: 600;
+    background: rgb(230, 252, 230);
+    border: dotted 3px rgb(220, 252, 220);
+    color: var(--light-dark);
+}
+/* Popup */
+.edit-popup-background {
+    background: rgba(0,0,0,0.4);
+    width: 100%;
+    height: 100%;
+    position: fixed;
+    top: 0;
+    left: 0;
+    z-index: 1000;
+    overflow: hidden;
+    display: flex;
+    align-items: center;
+}
+.edit-popup-wrapper {
+    margin: auto;
+    background: white;
+    padding: 20px;
+    border-radius: 5px;
+    box-shadow: 0 16px 24px rgb(0 0 0 / 10%), 0 6px 8px rgb(0 0 0 / 10%);
+}
+.edit-popup-title {
+    display: flex;
+    justify-content: space-between;
+    padding-bottom: 10px;
+    font-family: 'Poppins', sans-serif;
+    font-size: 1.2em;
+    font-weight: 600;
+    color: var(--light-dark);
+}
+.edit-popup-container {
+    display: flex;
+    justify-content: space-between;
+    flex-wrap: wrap;
+}
+.edit-popup-upload {
+    flex-grow: 1;
+}
+.edit-popup-input-container {
+    flex-grow: 2;
+    margin-left: 20px;
+}
+.edit-popup-image {
+    position: relative;
+    width: 180px;
+    height: 180px;
+}
+.edit-popup-image img {
+    width: 100%;
+    height: 100%;
+    border-radius: 5px;
+}
+.edit-popup-click {
+    position: absolute;
+    width: 180px;
+    height: 180px;
+    text-align: center;
+    line-height: 180px;
+    color: white;
+    font-size: 4em;
+    top: 0;
+    left: 0;
+    opacity: 0;
+    transition: all 0.4s;
+}
+.edit-popup-image:hover .edit-popup-click {
+    opacity: 1;
+    transition: all 0.4s;
+}
+.edit-popup-input {
+    display: flex;
+    flex-direction: column;
+    outline: none;
+}
+.edit-popup-input input,
+.edit-popup-input textarea {
+    color: rgba(0 0 0 / 35%);
+    font-family: 'Poppins', sans-serif;
+    font-weight: 600;
+    outline: none;
+}
+.edit-popup-input input:focus,
+.edit-popup-input textarea:focus {
+    border: solid 1px rgba(0 0 0 / 50%);
+    color: rgba(0 0 0 / 50%);
+}
+.edit-popup-input:last-child {
+    padding: 10px 0;
+}
+.edit-popup-input input,
+.edit-popup-input textarea {
+    border: solid 1px rgba(0 0 0 /20%);
+    border-radius: 3px;
+    /* font-family: 'Poppins', sans-serif; */
+}
+.edit-popup-input input {
+    height: 35px;
+    padding: 0 8px;
+}
+.edit-popup-input textarea {
+    height: 100px;
+    padding: 8px;
+}
+.btn-edit-popup {
+    text-align: right;
+    margin: 5px 0;
+}
+.btn-edit-popup button {
+    padding: 8px 20px;
+    font-family: 'Poppins', sans-serif;
+    font-weight: 600;
+    border-radius: 50px;
+    border: none;
+    background: var(--light-green);
+    color: white;
+    text-transform: uppercase;
+    cursor: pointer;
+}
+.btn-playlist {
+    position: absolute;
+    bottom: -45px;
+    font-size: 6em!important;
+    left: 90px;
+}
+@media screen and (max-width: 1200px) {
+    .playlist-wrapper {
+        flex-direction: column;
+    }
+    .playlist-box-left {
+        position: relative;
+    }
+    .playlist-box-right,
+    .playlist-song-container,
+    .playlist-title {
+        margin: 0;
+    }
+    .playlist-artist-container {
+        margin: 10px 0;
+    }
+}
+@media screen and (max-width: 670px) {
+    .playlist-wrapper {
+        margin: 0 30px;
+    }
+    .playlist-track-info a {
+        font-size: 0.8em;
+    }
+    .playlist-track-info a:last-child {
+        font-size: 0.7em;
+    }
+    .playlist-artist-container {
+        margin: 10px 0 80px 0;
+    }
+    .playlist-artist-image {
+        width: 80px;
+        height: 80px;
+    }
+    .playlist-artist-info {
+        font-size: 0.9em;
+    }
+}
+@media screen and (max-width: 600px) {
+    .edit-popup-container {
+        justify-content: center;
+    }
+    .edit-popup-wrapper {
+        width: 80%;
+    }
+    .edit-popup-form {
+        text-align: -webkit-center;
+    }
+    .edit-popup-input-container {
+        margin: 10px 0;
+    }
+}
+@media screen and (max-width: 450px) {
+    .edit-popup-input {
+        width: 80%;
+    }
+    .playlist-detail-image {
+        width: 250px;
+        height: 250px;
+    }
+    .btn-playlist {
+        left: 75px;
+    }
+}

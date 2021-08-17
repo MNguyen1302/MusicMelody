@@ -2,18 +2,20 @@ import React, { useState, useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 
 import LoadingS3 from '../Loading/LoadingS3';
-import { getTopSong } from '../../redux/actions/song';
-import TabItem from './TabItem';
+import actions from '../../redux/actions/songs';
+import SongItemTab from './SongItemTab';
+import ArtistItemTab from './ArtistItemTab';
 import './Tab.css';
 
 function Tab() {
-    const { trending, loading } = useSelector(state => state.song);
+    const { trending, loading } = useSelector(state => state.songs);
+    const { artists } = useSelector(state => state.artist)
     const dispatch = useDispatch();
 
     const [ indexTab, setIndexTab ] = useState(1);
 
     useEffect(() => {
-        dispatch(getTopSong());
+        dispatch(actions.getTopSong());
     }, [trending])
     
     const handleTabClick = (index) => {
@@ -59,8 +61,8 @@ function Tab() {
                                 <LoadingS3/>
                             </div>
                         ) : (
-                            trending.slice(0, 7).map((song, index) => {
-                                return <TabItem 
+                            trending.map((song, index) => {
+                                return <SongItemTab 
                                     key={song._id}
                                     index={index + 1}
                                     song={song}
@@ -73,7 +75,27 @@ function Tab() {
                     onClick={ () => handleTabClick(2) }
                     className={ indexTab === 2 ? 'tab-pane active' : 'tab-pane' }      
                 >
-                    {/* <TabItem />    */}
+                    {
+                        loading ? (
+                            <div>
+                                <LoadingS3/>
+                                <LoadingS3/>
+                                <LoadingS3/>
+                                <LoadingS3/>
+                                <LoadingS3/>
+                                <LoadingS3/>
+                                <LoadingS3/>
+                            </div>
+                        ) : (
+                            artists.map((artist, index) => {
+                                return <ArtistItemTab 
+                                    key={artist._id}
+                                    index={index + 1}
+                                    artist={artist}
+                                />
+                            })
+                        )
+                    }
                 </div>
                 <div
                     onClick={ () => handleTabClick(3) }
@@ -86,4 +108,4 @@ function Tab() {
     )
 }
 
-export default Tab
+export default Tab;

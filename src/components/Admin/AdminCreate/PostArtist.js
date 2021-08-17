@@ -2,7 +2,8 @@ import React, { useState } from 'react';
 import { useHistory } from 'react-router-dom';
 import { useDispatch, useSelector } from 'react-redux';
 
-import { createArtist } from '../../../redux/actions/artist';
+import actions from '../../../redux/actions/artist';
+import { FaSpinner } from 'react-icons/fa';
 import './Post.css';
 
 function PostArtist() {
@@ -22,25 +23,12 @@ function PostArtist() {
         e.preventDefault();
         setLoading(true);
 
-        dispatch(createArtist(
+        dispatch(actions.createArtist(
             artist.name,
             artist.genre,
             artist.image,
             artist.description,
         ))
-        // if(status === 'success') {
-        //     setArtist({
-        //         ...artist,
-        //         name: '',
-        //         genre: '',
-        //         description: ''
-        //     })
-        //     setLoading(false);
-        // } else {
-        //     setError({
-        //         error: status[1]
-        //     })
-        // }
         history.push('/admin/store/song');
     }
 
@@ -136,14 +124,14 @@ function PostArtist() {
                                 )}
                                 { isLoading && (
                                     <button className="btn-post" disabled>
-                                        <i className="fas fa-spinner fa-spin"></i>
+                                        <FaSpinner/>
                                         Save...
                                     </button>
                                 )} */}
                                 <button className="btn-post">
-                                        <i className="fas fa-spinner fa-spin"></i>
-                                        Save...
-                                    </button>
+                                    <FaSpinner/>
+                                    Save...
+                                </button>
                                 <button 
                                     className="btn-cancel"
                                     onClick={handleCancel}

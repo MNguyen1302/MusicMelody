@@ -49,11 +49,7 @@ function Profile() {
                 >
                     <div className="profile-user">
                         <div className="profile-user-avatar">
-                            { user.avatar ? (
-                                <img src={user.avatar} alt=""/>
-                            ) : (
-                                <img src={avatar} alt=""/>
-                            )}
+                            <img src={user.avatar} alt="Avatar"/> 
                         </div>
                         <div className="profile-user-info">
                             <div className="profile-input">

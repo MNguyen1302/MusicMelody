@@ -4,6 +4,7 @@ import cookies from 'js-cookie';
 let initialState = {
     user: null,
     favourite: [],
+    artists: [],
     isLogged: false,
     loading: false,
     errors: null
@@ -42,7 +43,8 @@ const user = (state = initialState, action) => {
         case types.GET_FAVOURITE:
             return {
                 ...state,
-                favourite: payload,
+                favourite: payload.favourites,
+                artists: payload.artists,
                 loading: false
             }
         default: 

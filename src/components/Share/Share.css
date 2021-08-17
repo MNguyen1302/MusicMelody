@@ -1,0 +1,69 @@
+.share-popup-background {
+    background: rgba(0,0,0,0.4);
+    width: 100%;
+    height: 100%;
+    position: fixed;
+    top: 0;
+    left: 0;
+    z-index: 1000;
+    overflow: hidden;
+    display: flex;
+    align-items: center;
+}
+.share-popup-wrapper {
+    margin: auto;
+    background: white;
+    padding: 20px;
+    border-radius: 5px;
+    box-shadow: 0 16px 24px rgb(0 0 0 / 10%), 0 6px 8px rgb(0 0 0 / 10%);
+}
+.share-popup-title {
+    display: flex;
+    justify-content: space-between;
+    padding-bottom: 5px;
+    font-family: 'Poppins', sans-serif;
+    font-size: 1.2em;
+    font-weight: 600;
+    color: var(--light-dark);
+    border-bottom: solid 1px rgb(0 0 0 / 20%);
+}
+.share-popup-container {
+    padding: 10px 0;
+}
+.share-popup-media {
+    padding: 5px 0;
+}
+.share-popup-link-box {
+    margin-top: 10px ;
+    font-family: 'Poppins', sans-serif;
+}
+.share-popup-field {
+    margin: 5px 0;
+    border: solid 1px rgb(0 0 0 / 20%);
+    border-radius: 2px;
+    padding: 5px;
+    transition: all 0.3s;
+}
+.share-popup-field input {
+    border: none;
+    outline: none;
+    padding: 0 5px;
+    font-size: 1em;
+    font-family: 'Poppins', sans-serif;
+    transition: all 0.3s;
+}
+.share-popup-field button {
+    padding: 5px 20px;
+    font-family: 'Poppins', sans-serif;
+    font-weight: 600;
+    background: var(--light-green);
+    color: white;
+    border: none;
+    border-radius: 2px;
+    cursor: pointer;
+}
+.share-popup-field.active,
+.share-popup-field.active input {
+    background: rgb(240, 250, 240);
+    transition: all 0.3s;
+}

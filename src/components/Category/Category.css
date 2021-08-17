@@ -116,3 +116,19 @@
 .sort-song-dropdown.show {
     display: flex;
 }
+@media screen and (max-width: 670px) {
+    .category-wrapper {
+        justify-content: center!important;
+    }
+    .category-image {
+        width: 100%;
+    }
+    .category-text-box {
+        padding: 30px 60px;
+    }
+}
+@media screen and (max-width: 450px) {
+    .category-image {
+        height: 240px;
+    }
+}

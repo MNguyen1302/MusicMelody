@@ -10,11 +10,11 @@
     background: var(--white);
     border-radius: 10px 10px 0 0 ;
 }
-.viewmore {
+.see-all {
     display: flex;
     align-items: center;
 }
-.viewmore a {
+.see-all a {
     display: flex;
     align-items: center;
     text-decoration: none;
@@ -34,4 +34,20 @@
 .song-loader {
     display: flex;
     flex-wrap: wrap;
+}
+.btn-sort {
+    font-size: 1.4em;
+}
+@media screen and (max-width: 1200px) {
+    .song-wrapper {
+        justify-content: center;
+    }
+}
+@media screen and (max-width: 450px) {
+    .song-title {
+        font-size: 0.9em;
+    }
+    .song-container {
+        padding: 20px 28px;
+    }
 }

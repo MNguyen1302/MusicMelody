@@ -3,19 +3,20 @@ import cookies from 'js-cookie';
 import { useDispatch, useSelector } from 'react-redux';
 import { useHistory } from 'react-router-dom';
 
-import { createSong } from '../../../redux/actions/song';
+import actions from '../../../redux/actions/admin';
+import { FaSpinner } from 'react-icons/fa';
 import './Post.css';
 
 function PostSong() {
     const userId = cookies.get('userId');
 
     const { isLogged } = useSelector(state => state.user);
+    const { loading } = useSelector(state => state.admin);
     const dispatch = useDispatch();
     const history = useHistory();
 
     const [ song, setSong ] = useState([]);
     const [ error, setError ] = useState({ error: '' });
-    const [ isLoading, setLoading ] = useState(false);
 
     if(!isLogged) {
         history.push('/auth/login')
@@ -24,7 +25,7 @@ function PostSong() {
     const handleSubmitPost = async (e) => {
         e.preventDefault();
         
-        dispatch(createSong(
+        dispatch(actions.createSong(
             song.name,
             song.artist,
             song.composer,
@@ -166,20 +167,15 @@ function PostSong() {
                                 onChange={handleChange}    
                             ></textarea>
                             <div className="btn-post-box">
-                                {/* { !isLoading && (
+                                { !loading && (
                                     <button className="btn-post" style={{ padding: '5px 20px' }}>Save</button>
                                 )}
-                                { isLoading && (
-                                    <button className="btn-post" disabled>
-                                        <i className="fas fa-spinner fa-spin"></i>
+                                { loading && (
+                                    <button className="btn-post" >
+                                        <FaSpinner/>
                                         Save...
                                     </button>
-                                )} */}
-
-                                <button className="btn-post">
-                                        <i className="fas fa-spinner fa-spin"></i>
-                                        Save...
-                                    </button>
+                                )}
                                 <button 
                                     className="btn-cancel"
                                     onClick={handleCancel}

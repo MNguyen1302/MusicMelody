@@ -4,13 +4,18 @@ import {
     Link, 
     useParams,
     useHistory } from 'react-router-dom';
+import { RiMoreFill, RiPlayCircleFill } from 'react-icons/ri';
+import { AiOutlineDownload } from 'react-icons/ai';
 import cookies from 'js-cookie';
 import axios from 'axios';
 
-import { getSong, likeSong } from '../../redux/actions/song';
+import useComponentVisible from '../../hooks/useComponentVisible';
+import actions from '../../redux/actions/song';
 import Modal from '../Modal/Modal';
 import Comment from '../Comment/Comment';
+import PopupMore from '../PopupMore/PopupMore';
 import LoadingPage from '../LoadingPage/LoadingPage';
+import Share from '../Share/Share';
 import './SongDetail.css';
 
 function SongDetail() {
@@ -18,6 +23,7 @@ function SongDetail() {
 
     const { isLogged } = useSelector(state => state.user);
     const { song, comments, loading } = useSelector(state => state.song);
+    const { isComponentVisible, handleClickInside } = useComponentVisible(false);
 
     const { slug } = useParams();
     const dispatch = useDispatch();
@@ -26,18 +32,12 @@ function SongDetail() {
 
     const [ isPlaying, setPlayPauseClick ] = useState(false);
     const [ showModal, setShowModal ] = useState(false);
+    const [ isShared, setIsShared ] = useState(false);
     const [ isLiked, setIsLiked ] = useState(false);
     const [ userLikes, setUserLikes ] = useState(0);
 
     useEffect(() => {
-        dispatch({
-            type: 'ADD_CURRENT_SONG',
-            payload: song
-        })
-    }, [song])
-
-    useEffect(() => {
-        dispatch(getSong(slug));
+        dispatch(actions.getSong(slug));
     }, [])
 
     useEffect(async () => {
@@ -57,9 +57,12 @@ function SongDetail() {
     const handlePlayBtn = () => {
         setPlayPauseClick(!isPlaying);
         dispatch({
+            type: 'ADD_CURRENT_SONG',
+            payload: song
+        })
+        dispatch({
             type: 'PLAY_PAUSE_SONG',
             payload: {
-                isPlaying: isPlaying,
                 currSong: JSON.parse(localStorage.getItem('currSong'))
             }
         }) 
@@ -72,6 +75,8 @@ function SongDetail() {
             return;
         }
 
+        dispatch(actions.likeSong(slug, userId));
+
         setTimeout(() => {
             setUserLikes(isLiked ? userLikes + 1 : userLikes - 1);
             setIsLiked(!isLiked);
@@ -81,14 +86,21 @@ function SongDetail() {
         setTimeout(() => {
             setShowModal(false);
         }, 3000)
+    }
 
-        dispatch(likeSong(slug, userId));
+    const showShareModal = (status) => {
+        setIsShared(status);
+    }
+
+    const closeShareModal = (status) => {
+        setIsShared(status);
     }
 
     return (
         <div>
             { loading ? <LoadingPage/> : (
                 <div className="song-detail-container">
+                    { isShared && <Share closeShareModal={closeShareModal}/>}
                     <div className="song-detail-wrapper">
                         <div className="song-detail-header">
                             <img 
@@ -110,12 +122,12 @@ function SongDetail() {
                                         <audio id="audio" ref={audioElement} src={song.audio}></audio>
                                         <div className="song-detail-icon">
                                             <button className="btn btn-toggle-play" onClick={handlePlayBtn}>
-                                                <i className="ri-play-circle-fill icon-play"></i> 
+                                                <RiPlayCircleFill className="icon-play"/> 
                                             </button>
                                         </div>
                                         <div className="song-detail-extra">
                                             <Link to={song.audio} target="_blank" download={song.name + '-' + song.artist}>
-                                                <i className="fas fa-download"></i>
+                                                <AiOutlineDownload/>
                                             </Link>
                                             <span 
                                                 className="btn-like" 
@@ -136,6 +148,12 @@ function SongDetail() {
                                                     </g>
                                                 </svg>
                                             </span>
+                                            <span><RiMoreFill onClick={handleClickInside}/></span>
+                                            <PopupMore 
+                                                fontSize="0.75em" 
+                                                isComponentVisible={isComponentVisible}
+                                                showShareModal={showShareModal}    
+                                            />
                                         </div>
                                     </div>
                                 </div>
@@ -152,7 +170,7 @@ function SongDetail() {
                             />
                         </div>
                     </div>
-                    { showModal ? <Modal content={!isLiked ? 'Add to your Favourite Songs' : 'Remove from your Favourite Songs'} opacity={showModal ? 1 : 0}/> : ''}
+                    { showModal ? <Modal content={!isLiked ? 'Add to your Favourite Songs' : 'Remove from your Favourite Songs'}/> : ''}
                 </div>
             )}
         </div>

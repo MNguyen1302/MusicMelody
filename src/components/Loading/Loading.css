@@ -128,7 +128,7 @@
     transition: all 0.3s ease;
 }
 .image-3 {
-    margin-left: 50px;
+    margin-left: 53px;
     width: 45px;
     height: 45px;
     border-radius: 3px;
@@ -139,7 +139,7 @@
     flex-direction: column;
 }
 .text-line-3 {
-    width: 320px;
+    width: 370px;
     height: 13px;
     margin: 5px 15px;
     border-radius: 2px;

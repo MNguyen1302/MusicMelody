@@ -155,3 +155,49 @@ svg {
     margin: -3px 5px;
     cursor: pointer;
 }
+
+@media screen and (max-width: 670px) {
+    .song-detail-header,
+    .song-detail-background {
+        height: 600px;
+    }
+
+    .song-detail-header::before {
+        height: 600px;
+    }
+    .song-detail {
+        display: block;
+        left: 105px;
+    }
+    .song-detail-main {
+        padding: 10px 0;
+        text-align: center;
+    }
+    .song-detail-image {
+        text-align: center;
+    }
+    .song-detail-lyric {
+        margin: 30px;
+    }
+    .song-detail-extra-wrapper {
+        flex-wrap: wrap;
+    }
+    .lyric {
+        padding: 30px;
+        font-size: 1em;
+    }
+    .song-detail-icon-box {
+        justify-content: space-between;
+    }
+    .song-detail-info span:first-child {
+        font-size: 1em;
+    }
+}
+@media screen and (max-width: 450px) {
+    .song-detail {
+        left: 65px;
+    }
+    .song-detail-info span:first-child {
+        font-size: 1em;
+    }
+}

@@ -7,8 +7,9 @@ import cookies from 'js-cookie'
 
 import LoadingPage from '../LoadingPage/LoadingPage';
 import Modal from '../Modal/Modal';
-import { getArtist, followArtist } from '../../redux/actions/artist';
 import ArtistTrack from './ArtistTrack';
+import actions from '../../redux/actions/artist';
+import { AiOutlineUser } from 'react-icons/ai';
 import './ArtistDetail.css';
 
 function ArtistDetail() {
@@ -27,8 +28,8 @@ function ArtistDetail() {
     const [ showModal, setShowModal ] = useState(false);
     const [ follower, setFollower ] = useState([]);
 
-    useEffect(async () => {
-        dispatch(getArtist(slug));
+    useEffect(() => {
+        dispatch(actions.getArtist(slug));
     }, [])
 
     useEffect(() => {
@@ -55,6 +56,8 @@ function ArtistDetail() {
             return;
         }
         
+        dispatch(actions.followArtist(slug, userId));
+        
         setTimeout(() => {
             setFollower(!isFollowing ? follower + 1 : follower - 1);
             setIsFollowing(!isFollowing);
@@ -64,8 +67,6 @@ function ArtistDetail() {
         setTimeout(() => {
             setShowModal(false);
         }, [3000])
-
-        dispatch(followArtist(slug, userId));
     }
       
     return (
@@ -110,7 +111,7 @@ function ArtistDetail() {
                                     <div className="artist-follow">
                                         <div className="follow-count">
                                             <span>{follower}</span>
-                                            <span><i className="far fa-user"></i></span>
+                                            <AiOutlineUser/>
                                         </div>
                                         <div className="btn-follow">
                                             <button onClick={handleFollowBtn}>
@@ -173,7 +174,7 @@ function ArtistDetail() {
                             </div>
                         </div>
                     </div>
-                    { showModal ? <Modal content={!isFollowing ? 'Add to your Favourite Artists' : 'Remove from your Favourite Artists'} opacity={showModal ? 1 : 0}/> : ''}
+                    { showModal ? <Modal content={isFollowing ? 'Add to your Favourite Artists' : 'Remove from your Favourite Artists'}/> : ''}
                 </div>
             )}
         </div>

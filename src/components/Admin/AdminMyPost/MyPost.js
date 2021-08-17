@@ -10,7 +10,7 @@ import './MyPost.css';
 
 function MyPost() {
     const { isLogged } = useSelector(state => state.user);
-    const { songs, loading } = useSelector(state => state.song);
+    const { songs, loading } = useSelector(state => state.admin);
     const history = useHistory();
 
     if(!isLogged) {

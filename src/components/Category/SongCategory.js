@@ -2,12 +2,13 @@ import React, { useState, useEffect } from 'react';
 import { useSelector, useDispatch } from 'react-redux';
 import { useParams } from 'react-router-dom';
 
-import { getCategory } from '../../redux/actions/song';
+import actions from '../../redux/actions/songs';
 import SongCard from '../SongCard/SongCard';
+import { MdSortByAlpha } from 'react-icons/md';
 import './Category.css';
 
 function CategoryShow() {
-    const { category } = useSelector(state => state.song);
+    const { category } = useSelector(state => state.songs);
     const { type } = useParams();
     const dispatch = useDispatch();
 
@@ -15,7 +16,7 @@ function CategoryShow() {
     const [ isSortAZ, setSortAZ ] = useState(false);
     
     useEffect(() => {
-        dispatch(getCategory(type));
+        dispatch(actions.getCategory(type));
     }, [])
     
     const handlePopup = () => {
@@ -54,7 +55,7 @@ function CategoryShow() {
                                 onClick={handlePopup}    
                             >
                                 <h3>Sort</h3>
-                                <i className="ri-sort-asc"></i>
+                                <MdSortByAlpha className="btn-sort"/>
                             </div>
                             <div className={ isPopup ? "sort-song-dropdown show" : "sort-song-dropdown"}>
                                 <span className="sort-a-z" onClick={ () => handleSort(true) }>A-Z</span>

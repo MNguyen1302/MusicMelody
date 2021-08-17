@@ -12,8 +12,8 @@
     animation-timing-function: cubic-bezier(0.4, 0, 1, 0.8);
     animation-iteration-count: infinite;
     animation-duration: 3s;
-    top: calc(50% - 4vmin);
-    left: 58%;
+    top: calc(45% - 4vmin);
+    left: 55%;
     transform-origin: -4vmin center;
 }
 .background span:nth-child(1) {

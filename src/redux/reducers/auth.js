@@ -22,6 +22,14 @@ const auth = (state = initialState, action) => {
                 loading: true,
                 ...payload
             }
+        case types.AUTH_GOOGLE_SUCCESS:
+            cookies.set('userId', payload._id);
+
+            return {
+                ...state,
+                isAuthenticated: true,
+                ...payload
+            }
         case types.AUTH_FAIL: 
             localStorage.removeItem('userToken');
             cookies.remove('userId');
@@ -31,6 +39,10 @@ const auth = (state = initialState, action) => {
                 isAuthenticated: false,
                 loading: false,
                 errors: 'Not Authenticated'
+            }
+        case types.REGISTER:
+            return {
+                ...state
             }
         default: 
             return state;

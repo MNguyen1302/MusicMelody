@@ -1,28 +1,23 @@
 import React, { useState, useEffect, useRef } from 'react';
 import { Link } from 'react-router-dom';
 import { useSelector } from 'react-redux';
+import { RiShuffleLine, RiSkipBackFill, RiSkipForwardFill, RiRepeat2Line, RiPlayCircleFill, RiPauseCircleFill, RiVolumeUpLine, RiVolumeMuteLine } from 'react-icons/ri';
 import './AudioBar.css';
 
 function AudioBar() {
-    const { currSong } = useSelector(state => state.song); 
+    const currSong = JSON.parse(localStorage.getItem('currSong'));
+
     const [ isPlaying, setPlayPauseClick ] = useState(false);
     const [ isLoop, setRepeatClick ] = useState(false);
     const [ trackProgress, setTrackProgress ] = useState(0);
     const [ duration, setDuration ] = useState(0);
+    const [ trackIndex, setTrackIndex ] = useState(0);
 
     const audioElement = useRef();
     const intervalRef = useRef();
 
     const  currentPercent = duration ? `${(trackProgress/duration) * 100}` : 0;
-    const trackStyling = `linear-gradient(90deg, #73d99f ${currentPercent}%, transparent ${currentPercent}%)`
-
-    const handlePlayBtn = () => {
-        setPlayPauseClick(!isPlaying);
-    }
-
-    const handleRepeatBtn = () => {
-        setRepeatClick(!isLoop);
-    }
+    const trackStyling = `linear-gradient(90deg, #73d99f ${currentPercent}%, transparent ${currentPercent}%)`;
 
     useEffect(() => {
         audioElement.current.loop = isLoop;
@@ -33,6 +28,14 @@ function AudioBar() {
             audioElement.current.pause();
         }
     }, [isPlaying])
+
+    const handlePlayBtn = () => {
+        setPlayPauseClick(!isPlaying);
+    }
+
+    const handleRepeatBtn = () => {
+        setRepeatClick(!isLoop);
+    }
 
     const startTimer = () => {
         clearInterval(intervalRef.current);
@@ -74,49 +77,56 @@ function AudioBar() {
         return "0" + minutes + ":" + seconds;
     }
 
+    const onLoadedMetadata = () => {
+        if(audioElement.current) {
+            setDuration(audioElement.current.duration);
+        }
+    }
+
     return (
         <div className="player">
             <div className="audio-control-bar">
-                <div className="audio-info-bar">
-                    <div className="audio-track">
-                        {
-                            currSong !== null && (
+                {
+                    currSong && (
+                        <div className="audio-info-bar">
+                            <div className="audio-track">
                                 <img src={currSong.image} alt="" id="song-image"/>
-                            )
-                        }
-                    </div>
-                    <div className="audio-content">
-                        <Link to={currSong !== null && ('/song/' + currSong.slug)}><span id="song-name">{currSong !== null && currSong.name}</span></Link>
-                        <br/>
-                        <Link to='/artist'><span id="song-artist">{currSong !== null && currSong.artist}</span></Link>
-                        <audio 
-                            id="song-audio"
-                            ref={audioElement} 
-                            src={currSong !== null && currSong.audio}
-                        ></audio>
-                    </div>
-                </div>  
+                            </div>
+                            <div className="audio-content">
+                                <Link to={`/song/${currSong.slug}`}><span id="song-name">{currSong.name}</span></Link>
+                                <br/>
+                                <Link to={'/artist/'}><span id="song-artist">{currSong.artist}</span></Link>
+                                <audio 
+                                    id="song-audio"
+                                    ref={audioElement} 
+                                    src={currSong.audio}
+                                    onLoadedMetadata={onLoadedMetadata}
+                                ></audio>
+                            </div>
+                        </div>
+                    )
+                }  
                 <div className="control-bar">
                     <div className="control-bar__controls">
-                        <button className="btn btn-random" title="Random"><i className="ri-shuffle-line"></i></button>
-                        <button className="btn btn-prev"><i className="ri-skip-back-fill"></i></button>
+                        <button className="btn btn-random" title="Random"><RiShuffleLine/></button>
+                        <button className="btn btn-prev"><RiSkipBackFill/></button>
                         <button 
                             id="btn-play"
                             className="btn btn-toggle-play" 
                             onClick={handlePlayBtn}
                         >
                             { !isPlaying ? (
-                                <i className="ri-play-circle-fill icon-play"></i>
+                                <RiPlayCircleFill className="icon-play"/>
                             ) : (
-                                <i className="ri-pause-circle-fill icon-pause"></i>
+                                <RiPauseCircleFill className="icon-pause"/>
                             )}
                         </button>
-                        <button className="btn btn-next"><i className="ri-skip-forward-fill"></i></button>
+                        <button className="btn btn-next"><RiSkipForwardFill/></button>
                         <button 
                             onClick={handleRepeatBtn}
                             className={ isLoop ? 'btn btn-repeat looping' : 'btn btn-repeat' }
                         >
-                            <i className="ri-repeat-2-line"></i>
+                            <RiRepeat2Line/>
                         </button>
                     </div>
                     <div className="progress-bar">
@@ -146,8 +156,8 @@ function AudioBar() {
                 <div className="extra-control">
                     <div className="volume-container">
                         <button className="volume-toggle">
-                            <i className="ri-volume-up-line icon-unmute"></i>
-                            <i className="ri-volume-mute-line icon-mute"></i>
+                            <RiVolumeUpLine className="icon-unmute"/>
+                            <RiVolumeMuteLine className="icon-mute"/>
                         </button>
                         <div className="volume-slider">
                             <div className="volume-slider__total">

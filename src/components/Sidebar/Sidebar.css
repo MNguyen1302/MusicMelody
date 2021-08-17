@@ -20,11 +20,12 @@
     display: flex;
     align-items: center;
     justify-content: space-between;
+    padding: 10px 0;
 }
 .sidebar-logo a {
     text-decoration: none;
     color: var(--light-green);
-    font-size: 1.6em;
+    font-size: 1.5em;
     font-family: 'Poppins', sans-serif;
     transition: all 0.3s ease-in-out;
 }
@@ -40,7 +41,6 @@
     padding: 0 15px;
 }
 .menu-sidebar {
-    margin: 20px 0;
     text-align: left;
 }
 .sidebar-header {
@@ -98,8 +98,9 @@
     transition: all 0.3s ease-in-out;
     width: 5rem;
 }
-.sidebar.active .sidebar-item a span,
+.sidebar.active .sidebar-item span,
 .sidebar.active .sidebar-header,
+.sidebar.active .sidebar-header span,
 .sidebar.active .sidebar-logo a {
     display: none;
 }
@@ -113,8 +114,36 @@
     padding: 25px 0;
     justify-content: center;
 }
+.sidebar.active .sidebar-item-link {
+    margin: 0;
+}
 .navbar.active,
 .content-page.active {
     margin-left: 5rem;
     transition: all 0.3s ease-in-out;
+}
+
+@media screen and (max-width: 1300px) {
+    .sidebar {
+        transition: all 0.4s ease-in-out;
+        width: 17.5rem;
+        left: -17.5rem;
+    }
+    .sidebar-header,
+    .sidebar-item,
+    .sidebar-logo {
+        display: none;
+    }
+    .sidebar.open {
+        transition: all 0.4s ease-in-out;
+        width: 17.5rem;
+        left: 0;
+        z-index: 999;
+    }
+    .sidebar.open .sidebar-header,
+    .sidebar.open .sidebar-item ,
+    .sidebar.open .sidebar-logo {
+        display: flex;
+        align-items: center;
+    }
 }

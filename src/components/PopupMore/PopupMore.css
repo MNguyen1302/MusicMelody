@@ -1,0 +1,49 @@
+.popup-more {
+    position: absolute;
+    padding: 2px;
+    height: 230px;
+    width: 190px;
+    /* right: 35px;
+    top: 2px; */
+    color: white;
+    background: var(--light-green);
+    border-radius: 5px;
+    box-shadow: 0 16px 24px rgb(0 0 0 / 10%), 0 6px 8px rgb(0 0 0 / 10%);
+    z-index: 10;
+}
+.popup-more ul {
+    list-style: none;
+}
+.popup-more ul li {
+    padding: 10px 20px;
+    cursor: pointer;
+}
+.popup-more ul li a {
+    text-decoration: none;
+    color: var(--white);
+    display: block;
+} 
+.popup-more-title {
+    color: var(--white)!important;
+    font-family: 'Poppins', sans-serif;
+    font-weight: 600;
+}
+.popup-playlist {
+    position: absolute;
+    padding: 2px;
+    width: 180px;
+    color: white;
+    background: var(--light-green);
+    border-radius: 5px;
+    box-shadow: 0 16px 24px rgb(0 0 0 / 10%), 0 6px 8px rgb(0 0 0 / 10%);
+    z-index: 10;
+    margin-bottom: 20px;
+    left: 180px;
+    bottom: 0;
+    opacity: 0;
+    transition: all 0.4s;
+}
+.popup-playlist-title:hover .popup-playlist {
+    opacity: 1;
+    transition: all 0.4s;
+}
